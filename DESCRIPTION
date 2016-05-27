@@ -13,7 +13,8 @@ Description: Access climate data from Government of Canada's Historical Climate
 Imports:
     readr,
     tibble,
-    curl
+    curl,
+    dplyr
 Suggests:
     testthat,
     knitr

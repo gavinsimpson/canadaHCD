@@ -1,8 +1,9 @@
 ##' @title Download monthly Historical Climate Data records
 ##'
 ##' @description Monthly Historical Climate Data for stated station IDs are downloaded from the Government of Canada's Historical Climate Data website.
-##' @param station Character; one or more (latter not currently implemented) HCD station IDs.
-##' @param collapse Logical; if multiple \code{station}s are requested a single \code{data_frame} is returned, formed by row-binding the data for each station and prepending a station identifier variable.
+##' @param station Character; one or more HCD station IDs.
+##' @param collapse Logical; if \code{TRUE} and multiple \code{station}s are requested a single \code{data frame} is returned, formed by row-binding the data for each station and prepending a station identifier variable.
+##' @param progress Logical; if \code{TRUE}, a bar is shown indicating progress in downloading station data from the HCD website.
 ##' @param ... Further arguments passed to \code{\link{read_hcd}}.
 ##'
 ##' @return A \code{\link{tbl_df}} containing the requested monthly climate data
@@ -12,12 +13,35 @@
 ##' @export
 ##'
 ##' @importFrom curl curl_download
-`hcd_monthly` <- function(station, collapse = TRUE, ...) {
-    URL <- paste0("http://climate.weather.gc.ca/climate_data/bulk_data_e.html?stationID=",
-                  station, "&Year=2000&Month=1&Day=14&format=csv&timeframe=3",
-                  "&submit=%20Download+Data")
-    tmp <- tempfile()
-    f <- curl_download(URL, destfile = tmp)
-    df <- read_hcd(f, ...)
-    df
+##' @importFrom utils txtProgressBar setTxtProgressBar
+`hcd_monthly` <- function(station, collapse = TRUE, progress = TRUE, ...) {
+    get_monthly <- function(station) {
+        URL <- paste0("http://climate.weather.gc.ca/climate_data/bulk_data_e.html?stationID=",
+                      station, "&Year=2000&Month=1&Day=14&format=csv&timeframe=3",
+                      "&submit=%20Download+Data")
+        tmp <- tempfile()
+        f <- curl_download(URL, destfile = tmp)
+        df <- read_hcd(f, ...)
+        df
+    }
+    ns <- length(station)
+    sdata <- vector(mode = "list", length = ns)
+    if (isTRUE(progress)) {
+        pb <- txtProgressBar(min = 0, max = ns, style = 3)
+    }
+    on.exit(close(pb))
+    for (i in seq_along(station)) {
+        sdata[[i]] <- get_monthly(station[[i]])
+        if (isTRUE(progress)) {
+            setTxtProgressBar(pb, i)
+        }
+    }
+    ## collapse multiple stations to a single tbl_df
+    if (collapse) {
+        nr <- vapply(sdata, NROW, integer(1L))
+        sdata <- dplyr::bind_rows(sdata)
+        sdata <- dplyr::mutate(sdata, Station = rep(station, times = nr))
+    }
+
+    sdata
 }
