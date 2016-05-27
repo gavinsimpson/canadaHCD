@@ -10,10 +10,7 @@
 ##'
 ##' @author Gavin L. Simpson
 ##'
-##' @importFrom readr read_csv
-##' @importFrom readr count_fields
-##' @importFrom readr locale
-##' @importFrom readr tokenizer_csv
+##' @importFrom readr read_csv count_fields locale tokenizer_csv
 ##' @importFrom tibble as_data_frame
 ##'
 ##' @export
