@@ -1,0 +1,74 @@
+
+R version 3.3.0 Patched (2016-05-17 r70629) -- "Supposedly Educational"
+Copyright (C) 2016 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "canadaHCD"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('canadaHCD')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("read_hcd")
+> ### * read_hcd
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: read_hcd
+> ### Title: Read Historical Climate Data files
+> ### Aliases: read_hcd
+> 
+> ### ** Examples
+> 
+> read_hcd(system.file("extdata/2855-monthly-data.csv", package = "canadaHCD"))
+Source: local data frame [515 x 14]
+
+   Date/Time  Year Month Mean Max Temp (°C) Mean Min Temp (°C) Mean Temp (°C)
+       <chr> <int> <chr>              <dbl>              <dbl>          <dbl>
+1    1965-01  1965    01                 NA                 NA             NA
+2    1965-02  1965    02                 NA                 NA             NA
+3    1965-03  1965    03               -8.1              -20.4          -14.3
+4    1965-04  1965    04                7.3               -1.9            2.7
+5    1965-05  1965    05               16.0                1.9            9.0
+6    1965-06  1965    06               21.7                9.4           15.6
+7    1965-07  1965    07               24.7               10.4           17.6
+8    1965-08  1965    08               24.6                9.1           16.9
+9    1965-09  1965    09               10.4                0.1            5.3
+10   1965-10  1965    10               14.1               -0.6            6.8
+..       ...   ...   ...                ...                ...            ...
+Variables not shown: Extr Max Temp (°C) <dbl>, Extr Min Temp (°C) <dbl>, Total
+  Rain (mm) <dbl>, Total Snow (cm) <dbl>, Total Precip (mm) <dbl>, Snow Grnd
+  Last Day (cm) <int>, Dir of Max Gust (10's deg) <int>, Spd of Max Gust (km/h)
+  <chr>.
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  0.41 0.014 0.424 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
