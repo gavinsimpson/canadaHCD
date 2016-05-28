@@ -1,8 +1,9 @@
 # Modified travis.yml set-up for the new native R support on Travis CI
 
 language: r
+cache: packages
 
-sudo: required
+sudo: false
 
 apt_packages:
   - qpdf
