@@ -20,7 +20,11 @@ A \code{\link{tbl_df}}.
 Reads data from CSV files download from the Canada Historical Climate Data website. The function knows about hourly, daily, and monthly data formatted files.
 }
 \examples{
+## read a monthly data file
 read_hcd(system.file("extdata/2855-monthly-data.csv", package = "canadaHCD"))
+
+## read a daily data file
+read_hcd(system.file("extdata/2855-daily-data-2015.csv", package = "canadaHCD"))
 }
 \author{
 Gavin L. Simpson
