@@ -43,7 +43,7 @@
     if (collapse) {
         nr <- vapply(sdata, NROW, integer(1L))
         sdata <- dplyr::bind_rows(sdata)
-        sdata <- dplyr::mutate(sdata, Station = rep(station, times = nr))
+        sdata <- dplyr::mutate(sdata, Station = rep(expand$station, times = nr))
     }
 
     sdata

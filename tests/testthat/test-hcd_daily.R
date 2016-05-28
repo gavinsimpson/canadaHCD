@@ -34,4 +34,3 @@ test_that("hcd_daily() works with multiple years", {
     expect_that(df[[2]], is_a("tbl_df"))
     expect_that(df[[3]], is_a("tbl_df"))
 })
-
