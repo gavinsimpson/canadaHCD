@@ -16,12 +16,6 @@
 ##' @importFrom curl curl_download
 ##' @importFrom utils txtProgressBar setTxtProgressBar
 `hcd_daily` <- function(station, year, collapse = TRUE, progress = TRUE, ...) {
-    get_daily <- function(URL, ...) {
-        tmp <- tempfile()
-        f <- curl_download(URL, destfile = tmp)
-        df <- read_hcd(f, ...)
-        df
-    }
     expand <- expand.grid(station = station, year = year)
     ns <- NROW(expand)
     urls <- with(expand,
@@ -34,7 +28,7 @@
     }
     on.exit(close(pb))
     for (i in seq_along(sdata)) {
-        sdata[[i]] <- get_daily(urls[i], ...)
+        sdata[[i]] <- get_hcd_from_url(urls[i], ...)
         if (isTRUE(progress)) {
             setTxtProgressBar(pb, i)
         }

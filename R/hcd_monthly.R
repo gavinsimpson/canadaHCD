@@ -15,23 +15,17 @@
 ##' @importFrom curl curl_download
 ##' @importFrom utils txtProgressBar setTxtProgressBar
 `hcd_monthly` <- function(station, collapse = TRUE, progress = TRUE, ...) {
-    get_monthly <- function(station) {
-        URL <- paste0("http://climate.weather.gc.ca/climate_data/bulk_data_e.html?stationID=",
-                      station, "&Year=2000&Month=1&Day=14&format=csv&timeframe=3",
-                      "&submit=%20Download+Data")
-        tmp <- tempfile()
-        f <- curl_download(URL, destfile = tmp)
-        df <- read_hcd(f, ...)
-        df
-    }
     ns <- length(station)
+    urls <- paste0("http://climate.weather.gc.ca/climate_data/bulk_data_e.html?stationID=",
+                  station, "&Year=2000&Month=1&Day=14&format=csv&timeframe=3",
+                  "&submit=%20Download+Data")
     sdata <- vector(mode = "list", length = ns)
     if (isTRUE(progress)) {
         pb <- txtProgressBar(min = 0, max = ns, style = 3)
     }
     on.exit(close(pb))
     for (i in seq_along(station)) {
-        sdata[[i]] <- get_monthly(station[[i]])
+        sdata[[i]] <- get_hcd_from_url(urls[i])
         if (isTRUE(progress)) {
             setTxtProgressBar(pb, i)
         }
