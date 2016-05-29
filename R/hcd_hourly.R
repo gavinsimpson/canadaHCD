@@ -15,7 +15,7 @@
 ##' @export
 ##'
 ##' @importFrom curl curl_download
-##' @importFrom utils txtProgressBar setTxtProgressBar
+##' @importFrom dplyr bind_rows mutate
 `hcd_hourly` <- function(station, year, month, collapse = TRUE, progress = TRUE, ...) {
     expand <- expand.grid(station = station, year = year, month = month)
     ns <- NROW(expand)
@@ -23,22 +23,13 @@
                  paste0("http://climate.weather.gc.ca/climate_data/bulk_data_e.html?stationID=",
                         station, "&Year=", year, "&Month=", month, "&Day=14&format=csv&timeframe=1",
                         "&submit=%20Download+Data"))
-    sdata <- vector(mode = "list", length = ns)
-    if (isTRUE(progress)) {
-        pb <- txtProgressBar(min = 0, max = ns, style = 3)
-    }
-    on.exit(close(pb))
-    for (i in seq_along(sdata)) {
-        sdata[[i]] <- get_hcd_from_url(urls[i], ...)
-        if (isTRUE(progress)) {
-            setTxtProgressBar(pb, i)
-        }
-    }
+    ## Download data
+    sdata <- process_downloads(urls, progress = progress, ...)
     ## collapse multiple stations to a single tbl_df
     if (collapse) {
         nr <- vapply(sdata, NROW, integer(1L))
-        sdata <- dplyr::bind_rows(sdata)
-        sdata <- dplyr::mutate(sdata, Station = rep(expand$station, times = nr))
+        sdata <- bind_rows(sdata)
+        sdata <- mutate(sdata, Station = rep(expand$station, times = nr))
     }
 
     sdata
