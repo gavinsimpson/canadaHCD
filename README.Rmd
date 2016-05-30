@@ -41,10 +41,10 @@ yh
 
 You should be able to work with these objects mostly as if they were data frames.
 
-Allthough not yet exposed through any functions in the package, you can access a snapshot of the station metadata via the `canadaHCD::station_data` data frame.
+Allthough not yet exposed through any functions in the package, you can access a snapshot of the station metadata via the `canadaHCD:::station_data` data frame.
 
 ```{r station-data}
-canadaHCD::station_data
+canadaHCD:::station_data
 ```
 
 If we wanted to know which resolutions of data were available for the `YELLOWKNIFE HYDRO` station, we can extract certain columns from the station data object
@@ -52,5 +52,5 @@ If we wanted to know which resolutions of data were available for the `YELLOWKNI
 ```{r extract-station_data}
 id <- grep("YELLOWKNIFE HYDRO", canadaHCD::station_data$Name)
 vars <- c("HourlyFirstYr", "HourlyLastYR", "DailyFirstYr", "DailyLastYR", "MonthlyFirstYr", "MonthlyLastYR")
-canadaHCD::station_data[id, vars]
+canadaHCD:::station_data[id, vars]
 ```

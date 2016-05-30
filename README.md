@@ -82,15 +82,33 @@ yh
 
 You should be able to work with these objects mostly as if they were data frames.
 
-Allthough not yet exposed through any functions in the package, you can access a snapshot of the station metadata via the `canadaHCD::station_data` data frame.
+Allthough not yet exposed through any functions in the package, you can access a snapshot of the station metadata via the `canadaHCD:::station_data` data frame.
 
 
 ```r
-canadaHCD::station_data
+canadaHCD:::station_data
 ```
 
 ```
-## Error: 'station_data' is not an exported object from 'namespace:canadaHCD'
+## Source: local data frame [12,565 x 19]
+## 
+##                      Name         Province ClimateID StationID  WMOID
+##                    <fctr>           <fctr>    <fctr>    <fctr> <fctr>
+## 1             ACTIVE PASS British Columbia   1010066        14     NA
+## 2             ALBERT HEAD British Columbia   1010235        15     NA
+## 3  BAMBERTON OCEAN CEMENT British Columbia   1010595        16     NA
+## 4              BEAR CREEK British Columbia   1010720        17     NA
+## 5             BEAVER LAKE British Columbia   1010774        18     NA
+## 6              BECHER BAY British Columbia   1010780        19     NA
+## 7         BRENTWOOD BAY 2 British Columbia   1010960        20     NA
+## 8   BRENTWOOD CLARKE ROAD British Columbia   1010961        21     NA
+## 9  BRENTWOOD W SAANICH RD British Columbia   1010965        22     NA
+## 10             BEAR CREEK British Columbia   1010PJR      9634     NA
+## ..                    ...              ...       ...       ...    ...
+## Variables not shown: TCID <fctr>, LatitudeDD <dbl>, LongitudeDD <dbl>,
+##   Latitude <int>, Longitude <int>, Elevation <dbl>, FirstYear <int>,
+##   LastYear <int>, HourlyFirstYr <int>, HourlyLastYr <int>, DailyFirstYr
+##   <int>, DailyLastYr <int>, MonthlyFirstYr <int>, MonthlyLastYr <int>.
 ```
 
 If we wanted to know which resolutions of data were available for the `YELLOWKNIFE HYDRO` station, we can extract certain columns from the station data object
@@ -106,9 +124,9 @@ id <- grep("YELLOWKNIFE HYDRO", canadaHCD::station_data$Name)
 
 ```r
 vars <- c("HourlyFirstYr", "HourlyLastYR", "DailyFirstYr", "DailyLastYR", "MonthlyFirstYr", "MonthlyLastYR")
-canadaHCD::station_data[id, vars]
+canadaHCD:::station_data[id, vars]
 ```
 
 ```
-## Error: 'station_data' is not an exported object from 'namespace:canadaHCD'
+## Error in .check_names_df(x, j): undefined columns: HourlyLastYR, DailyLastYR, MonthlyLastYR
 ```
