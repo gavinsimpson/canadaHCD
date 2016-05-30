@@ -13,8 +13,7 @@ These are raw data that have undergone some quality control, but issues such as 
 
 *canadaHCD* is still under active development towards a 0.1 release. In the meantime, if you wish to use the package, please install it from this github repo, which is most easily achieved using Hadley Wickham's *devtools* package:
 
-
-```r
+```{r, eval = FALSE}
 ## install.packages("devtools")
 devtools::install_github("gavinsimpson/canadaHCD")
 ```
@@ -23,92 +22,35 @@ devtools::install_github("gavinsimpson/canadaHCD")
 
 Say I'm interested in climate data for stations in Yellowknife, I can search for all known `stationID`s with `"Yellowknife"` in their name using `find_station()`
 
-
-```r
+```{r find-station}
 library("canadaHCD")
 find_station("Yellowknife")
 ```
 
-```
-## Source: local data frame [7 x 5]
-## 
-##                    Name              Province StationID LatitudeDD
-##                  <fctr>                <fctr>    <fctr>      <dbl>
-## 1         YELLOWKNIFE A Northwest Territories      1706      62.46
-## 2         YELLOWKNIFE A Northwest Territories     51058      62.46
-## 3   YELLOWKNIFE OVERLAP Northwest Territories     53898      62.46
-## 4 YELLOWKNIFE-HENDERSON Northwest Territories     45467      62.45
-## 5  YELLOWKNIFE CON MINE Northwest Territories      8949      62.47
-## 6        YELLOWKNIFE CS Northwest Territories     27338      62.47
-## 7     YELLOWKNIFE HYDRO Northwest Territories      1707      62.67
-## Variables not shown: LongitudeDD <dbl>.
-```
-
 To download the monthly HCD from `YELLOWKNIFE HYDRO` I can use `hcd_monthly()`, providing it with the `StationID` for that particular weather station
 
-
-```r
+```{r download-monthly}
 yh <- hcd_monthly(1707)
-```
-
-```
-##   |                                                                         |                                                                 |   0%  |                                                                         |=================================================================| 100%
 ```
 
 The data are returned as a [*tibble*](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html) (a `tbl_df`), which shows a compact version of the data frame.
 
-
-```r
+```{r show-data}
 yh
-```
-
-```
-## Source: local data frame [690 x 13]
-## 
-##    Date/Time Mean Max Temp (°C) Mean Min Temp (°C) Mean Temp (°C)
-##        <chr>              <dbl>              <dbl>          <dbl>
-## 1    1943-01                 NA                 NA             NA
-## 2    1943-02              -16.2              -26.4          -21.3
-## 3    1943-03              -14.4              -29.4          -21.9
-## 4    1943-04                1.2              -12.3           -5.6
-## 5    1943-05                9.3               -3.6            2.9
-## 6    1943-06               17.6                2.4           10.0
-## 7    1943-07               20.6                9.6           15.1
-## 8    1943-08               18.9                7.2           13.1
-## 9    1943-09               10.9                2.0            6.5
-## 10   1943-10                6.1               -1.9            2.1
-## ..       ...                ...                ...            ...
-## Variables not shown: Extr Max Temp (°C) <dbl>, Extr Min Temp (°C) <dbl>,
-##   Total Rain (mm) <dbl>, Total Snow (cm) <dbl>, Total Precip (mm) <dbl>,
-##   Snow Grnd Last Day (cm) <int>, Dir of Max Gust (10's deg) <int>, Spd of
-##   Max Gust (km/h) <chr>, Station <dbl>.
 ```
 
 You should be able to work with these objects mostly as if they were data frames.
 
 Allthough not yet exposed through any functions in the package, you can access a snapshot of the station metadata via the `canadaHCD::station_data` data frame.
 
-
-```r
+```{r station-data}
 canadaHCD::station_data
-```
-
-```
-## Error: 'station_data' is not an exported object from 'namespace:canadaHCD'
 ```
 
 If we wanted to know which resolutions of data were available for the `YELLOWKNIFE HYDRO` station, we can extract certain columns from the station data object
 
-
-```r
+```{r extract-station_data}
 id <- grep("YELLOWKNIFE HYDRO", canadaHCD::station_data$Name)
 vars <- c("HourlyFirstYr", "HourlyLastYR", "DailyFirstYr", "DailyLastYR", "MonthlyFirstYr", "MonthlyLastYR"
 canadaHCD::station_data[id, vars]
-```
-
-```
-## Error: <text>:3:1: unexpected symbol
-## 2: vars <- c("HourlyFirstYr", "HourlyLastYR", "DailyFirstYr", "DailyLastYR", "MonthlyFirstYr", "MonthlyLastYR"
-## 3: canadaHCD
-##    ^
 ```

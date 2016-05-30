@@ -32,3 +32,6 @@ clean:
 purl:
 	cd ..;\
 	R -q -e 'library("knitr"); purl("./canadaHCD/vignettes/canadaHCD.Rnw")'
+
+knit:
+	R -q -e 'library("knitr"); knit("./README.Rmd")'
