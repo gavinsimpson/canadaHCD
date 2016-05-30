@@ -24,6 +24,50 @@ Type 'q()' to quit R.
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 > cleanEx()
+> nameEx("find_station")
+> ### * find_station
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: find_station
+> ### Title: Find a Historical Climate Data station
+> ### Aliases: find_station
+> 
+> ### ** Examples
+> 
+> find_station("Regina")
+Source: local data frame [30 x 5]
+
+                         Name     Province StationID LatitudeDD LongitudeDD
+                       <fctr>       <fctr>    <fctr>      <dbl>       <dbl>
+1                      REGINA Saskatchewan      7450         NA          NA
+2                      REGINA Saskatchewan      7451      50.45     -104.62
+3              REGINA INT'L A Saskatchewan      3002      50.43     -104.67
+4                      REGINA Saskatchewan     50877      50.43     -104.67
+5  REGINA CO-OP UPGRADER SNOW Saskatchewan     46587      50.49     -104.59
+6           REGINA SIAST SNOW Saskatchewan     46588      50.41     -104.58
+7            REGINA RCMP SNOW Saskatchewan     46607      50.45     -104.67
+8               REGINA INTL A Saskatchewan     51441      50.43     -104.67
+9             REGINA AP STN A Saskatchewan      7452      50.43     -104.62
+10            REGINA AP STN B Saskatchewan      7453      50.42     -104.62
+..                        ...          ...       ...        ...         ...
+> 
+> find_station("Yellowknife")
+Source: local data frame [7 x 5]
+
+                   Name              Province StationID LatitudeDD LongitudeDD
+                 <fctr>                <fctr>    <fctr>      <dbl>       <dbl>
+1         YELLOWKNIFE A Northwest Territories      1706      62.46     -114.44
+2         YELLOWKNIFE A Northwest Territories     51058      62.46     -114.44
+3   YELLOWKNIFE OVERLAP Northwest Territories     53898      62.46     -114.44
+4 YELLOWKNIFE-HENDERSON Northwest Territories     45467      62.45     -114.38
+5  YELLOWKNIFE CON MINE Northwest Territories      8949      62.47     -114.33
+6        YELLOWKNIFE CS Northwest Territories     27338      62.47     -114.45
+7     YELLOWKNIFE HYDRO Northwest Territories      1707      62.67     -114.25
+> 
+> 
+> 
+> cleanEx()
 > nameEx("read_hcd")
 > ### * read_hcd
 > 
@@ -84,7 +128,7 @@ Variables not shown: Cool Deg Days (°C) <dbl>, Total Rain (mm) <dbl>, Total
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.435 0.015 0.45 0 0 
+Time elapsed:  0.864 0.015 0.879 0 0 
 > grDevices::dev.off()
 null device 
           1 
