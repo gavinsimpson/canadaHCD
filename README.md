@@ -115,18 +115,16 @@ If we wanted to know which resolutions of data were available for the `YELLOWKNI
 
 
 ```r
-id <- grep("YELLOWKNIFE HYDRO", canadaHCD::station_data$Name)
-```
-
-```
-## Error: 'station_data' is not an exported object from 'namespace:canadaHCD'
-```
-
-```r
+id <- grep("YELLOWKNIFE HYDRO", canadaHCD:::station_data$Name)
 vars <- c("HourlyFirstYr", "HourlyLastYr", "DailyFirstYr", "DailyLastYr", "MonthlyFirstYr", "MonthlyLastYr")
 canadaHCD:::station_data[id, vars]
 ```
 
 ```
-## Error in lapply(x, `[`, i): object 'id' not found
+## Source: local data frame [1 x 6]
+## 
+##   HourlyFirstYr HourlyLastYr DailyFirstYr DailyLastYr MonthlyFirstYr
+##           <int>        <int>        <int>       <int>          <int>
+## 1            NA           NA         1943        2000           1943
+## Variables not shown: MonthlyLastYr <int>.
 ```

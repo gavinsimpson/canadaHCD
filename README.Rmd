@@ -50,7 +50,7 @@ canadaHCD:::station_data
 If we wanted to know which resolutions of data were available for the `YELLOWKNIFE HYDRO` station, we can extract certain columns from the station data object
 
 ```{r extract-station_data}
-id <- grep("YELLOWKNIFE HYDRO", canadaHCD::station_data$Name)
+id <- grep("YELLOWKNIFE HYDRO", canadaHCD:::station_data$Name)
 vars <- c("HourlyFirstYr", "HourlyLastYr", "DailyFirstYr", "DailyLastYr", "MonthlyFirstYr", "MonthlyLastYr")
 canadaHCD:::station_data[id, vars]
 ```
