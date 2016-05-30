@@ -98,13 +98,17 @@ If we wanted to know which resolutions of data were available for the `YELLOWKNI
 
 ```r
 id <- grep("YELLOWKNIFE HYDRO", canadaHCD::station_data$Name)
-vars <- c("HourlyFirstYr", "HourlyLastYR", "DailyFirstYr", "DailyLastYR", "MonthlyFirstYr", "MonthlyLastYR"
+```
+
+```
+## Error: 'station_data' is not an exported object from 'namespace:canadaHCD'
+```
+
+```r
+vars <- c("HourlyFirstYr", "HourlyLastYR", "DailyFirstYr", "DailyLastYR", "MonthlyFirstYr", "MonthlyLastYR")
 canadaHCD::station_data[id, vars]
 ```
 
 ```
-## Error: <text>:3:1: unexpected symbol
-## 2: vars <- c("HourlyFirstYr", "HourlyLastYR", "DailyFirstYr", "DailyLastYR", "MonthlyFirstYr", "MonthlyLastYR"
-## 3: canadaHCD
-##    ^
+## Error: 'station_data' is not an exported object from 'namespace:canadaHCD'
 ```
