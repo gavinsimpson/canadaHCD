@@ -51,10 +51,6 @@ To download the monthly HCD from `YELLOWKNIFE HYDRO` I can use `hcd_monthly()`, 
 yh <- hcd_monthly(1707)
 ```
 
-```
-##   |                                                                         |                                                                 |   0%  |                                                                         |=================================================================| 100%
-```
-
 The data are returned as a [*tibble*](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html) (a `tbl_df`), which shows a compact version of the data frame.
 
 

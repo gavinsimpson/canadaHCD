@@ -29,7 +29,7 @@ find_station("Yellowknife")
 
 To download the monthly HCD from `YELLOWKNIFE HYDRO` I can use `hcd_monthly()`, providing it with the `StationID` for that particular weather station
 
-```{r download-monthly}
+```{r download-monthly, results = "hide"}
 yh <- hcd_monthly(1707)
 ```
 
