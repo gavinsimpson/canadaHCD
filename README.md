@@ -123,10 +123,10 @@ id <- grep("YELLOWKNIFE HYDRO", canadaHCD::station_data$Name)
 ```
 
 ```r
-vars <- c("HourlyFirstYr", "HourlyLastYR", "DailyFirstYr", "DailyLastYR", "MonthlyFirstYr", "MonthlyLastYR")
+vars <- c("HourlyFirstYr", "HourlyLastYr", "DailyFirstYr", "DailyLastYr", "MonthlyFirstYr", "MonthlyLastYr")
 canadaHCD:::station_data[id, vars]
 ```
 
 ```
-## Error in .check_names_df(x, j): undefined columns: HourlyLastYR, DailyLastYR, MonthlyLastYR
+## Error in lapply(x, `[`, i): object 'id' not found
 ```
