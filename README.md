@@ -116,7 +116,8 @@ If we wanted to know which resolutions of data were available for the `YELLOWKNI
 
 ```r
 id <- grep("YELLOWKNIFE HYDRO", canadaHCD:::station_data$Name)
-vars <- c("HourlyFirstYr", "HourlyLastYr", "DailyFirstYr", "DailyLastYr", "MonthlyFirstYr", "MonthlyLastYr")
+vars <- c("HourlyFirstYr", "HourlyLastYr", "DailyFirstYr", "DailyLastYr", "MonthlyFirstYr", 
+    "MonthlyLastYr")
 canadaHCD:::station_data[id, vars]
 ```
 
@@ -128,3 +129,5 @@ canadaHCD:::station_data[id, vars]
 ## 1            NA           NA         1943        2000           1943
 ## Variables not shown: MonthlyLastYr <int>.
 ```
+
+The output shows that this station has no hourly data, but daily and monthly data sets exist.

@@ -49,8 +49,10 @@ canadaHCD:::station_data
 
 If we wanted to know which resolutions of data were available for the `YELLOWKNIFE HYDRO` station, we can extract certain columns from the station data object
 
-```{r extract-station_data}
+```{r extract-station_data, tidy = TRUE, tidy.opts=list(blank=FALSE, width.cutoff=80)}
 id <- grep("YELLOWKNIFE HYDRO", canadaHCD:::station_data$Name)
 vars <- c("HourlyFirstYr", "HourlyLastYr", "DailyFirstYr", "DailyLastYr", "MonthlyFirstYr", "MonthlyLastYr")
 canadaHCD:::station_data[id, vars]
 ```
+
+The output shows that this station has no hourly data, but daily and monthly data sets exist.
