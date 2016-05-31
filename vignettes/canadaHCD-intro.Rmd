@@ -54,8 +54,6 @@ yh
 
 You should be able to work with these objects mostly as if they were data frames.
 
-The data are returned as a [*tibble*](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html) (a `tbl_df`), which shows a compact version of the data frame.
-
 Functions `hcd_daily()` and `hcd_hourly()` are provided to access data files for different temporal resolutions. The file formats differ between resolutions both in terms of how much data is included in a file, but which climate/weather variables are provided. For example, there are no precipitation data at the hourly-resolution.
 
 * For monthly data, the HCD provides *all* available observations for a particular station in the single download. As a result you only need provide `hcd_monthly()` with a the `StationID`
