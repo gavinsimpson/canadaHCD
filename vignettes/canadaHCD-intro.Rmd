@@ -1,0 +1,79 @@
+---
+title: "Canadian Historical Climate Data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Canadian Historical Climate Data}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+options(tibble.width = 80)
+library("canadaHCD")
+```
+```{r, download-fake, echo = FALSE}
+yh  <- read_hcd(system.file("extdata/1707-monthly-data.csv", package = "canadaHCD"))
+bvh <- read_hcd(system.file("extdata/2855-monthly-data.csv", package = "canadaHCD"))
+bvd <- read_hcd(system.file("extdata/2855-daily-data-2015.csv", package = "canadaHCD"))
+bvh <- read_hcd(system.file("extdata/2855-hourly-data-2013-jan.csv", package = "canadaHCD"))
+```
+
+The Government of Canada's Historical Climate Data [website](http://climate.weather.gc.ca/index_e.html) provides access to hourly, daily, and monthly weather records for stations throughout Canada. These data are exposed through a simple web-based API that facilitates retrieval of data for one or more of the three period in CSV or XML format. *canadaHCD* provides an R-based interface to that API, taking care of forming the correct URL for a data set and of reading the different file formats.
+
+The main piece of information required to access a dataset is the HCD `StationID`; an numeric ID internal to the Government of Canada's database. This `StationID` plus information about the resolution and period you want to retrieve data for are the key elements to accessing records. A list of these stations is regularly updated via a CSV located on a Government of Canada FTP server. As a convenience a recent snapshot of this CSV metadata is available via the unexported data frame `canadaHCD:::station_data`. A (currently) simple interface to this metadat is provided via `find_station()`. 
+
+Say you're interested in climate data for stations in Yellowknife, I can search for all known `stationID`s with `"Yellowknife"` in their name using `find_station()`
+
+```{r find-station}
+library("canadaHCD")
+find_station("Yellowknife")
+```
+
+If we wanted to know which resolutions of data were available for the `YELLOWKNIFE HYDRO` station, we can extract certain columns from the `canadaHCD:::station_data` object
+
+```{r extract-station_data, tidy = TRUE, tidy.opts=list(blank = FALSE, width.cutoff = 80)}
+id <- grep("YELLOWKNIFE HYDRO", canadaHCD:::station_data$Name)
+vars <- c("HourlyFirstYr", "HourlyLastYr", "DailyFirstYr", "DailyLastYr", "MonthlyFirstYr", "MonthlyLastYr")
+canadaHCD:::station_data[id, vars]
+```
+
+The output shows that this station has no hourly data, but that daily and monthly data sets exist.
+
+To download the monthly HCD from `YELLOWKNIFE HYDRO` you can use `hcd_monthly()`, providing it with the `StationID` for that particular weather station, either as an integer or as a character string
+
+```{r download-monthly, eval = FALSE}
+yh <- hcd_monthly(1707)
+```
+
+The data are returned as a [*tibble*](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html) (a `tbl_df`), which shows a compact version of the data frame.
+
+```{r show-monthly}
+yh
+```
+
+You should be able to work with these objects mostly as if they were data frames.
+
+The data are returned as a [*tibble*](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html) (a `tbl_df`), which shows a compact version of the data frame.
+
+Functions `hcd_daily()` and `hcd_hourly()` are provided to access data files for different temporal resolutions. The file formats differ between resolutions both in terms of how much data is included in a file, but which climate/weather variables are provided. For example, there are no precipitation data at the hourly-resolution.
+
+* For monthly data, the HCD provides *all* available observations for a particular station in the single download. As a result you only need provide `hcd_monthly()` with a the `StationID`
+
+    ```{r, download-monthly-bv, eval = FALSE}
+    bvm <- hcd_monthly(2855)
+    ```
+
+* For daily resolution data, each CSV file provides an entire year of data. Therefore, both a `StationID` and a year need to be supplied
+
+    ```{r, download-daily-bv, eval = FALSE}
+    bvd <- hcd_daily(2855, year = 2015)
+    ```
+    
+* For hourly data, each CSV file contains an entire month of data. Therefore, a `StationID`, a year, and a month need to be supplied
+
+    ```{r, download-hourly-bv, eval = FALSE}
+    bvh <- hcd_hourly(2855, year = 2013, month = 1)
+    ```
+
+Each of the above downlaods data for the Broadview weather station in Saskatchewan.
