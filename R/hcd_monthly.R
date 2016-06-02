@@ -21,6 +21,7 @@
                   "&submit=%20Download+Data")
     ## Download data
     sdata <- process_downloads(urls, progress = progress, ...)
+
     ## collapse multiple stations to a single tbl_df
     if (collapse) {
         nr <- vapply(sdata, NROW, integer(1L))
