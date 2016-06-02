@@ -16,7 +16,8 @@ Imports:
     readr,
     tibble,
     curl,
-    dplyr
+    dplyr,
+    zoo
 Suggests:
     testthat,
     knitr,
