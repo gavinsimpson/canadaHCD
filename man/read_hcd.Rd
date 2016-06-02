@@ -4,12 +4,14 @@
 \alias{read_hcd}
 \title{Read Historical Climate Data files}
 \usage{
-read_hcd(file, flags = FALSE, ...)
+read_hcd(file, flags = FALSE, clean = TRUE, ...)
 }
 \arguments{
 \item{file}{Either a path to a file, a connection. See argument \code{file} of \code{\link{read_csv}}.}
 
 \item{flags}{Logical; should variable flag columns be preserved. The default results in these columns being dropped from the returned data.}
+
+\item{clean}{Logical; should variable names be cleaned? The default replaces the variable identifiers from the CSV files with more useful names for use in R code.}
 
 \item{...}{Further arguments passed to \code{\link{read_csv}}.}
 }

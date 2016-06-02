@@ -51,6 +51,10 @@ To download the monthly HCD from `YELLOWKNIFE HYDRO` I can use `hcd_monthly()`, 
 yh <- hcd_monthly(1707)
 ```
 
+```
+## Error in as.yearmon(as.character(`Date/Time`), format = "%Y-%m"): object 'Date/Time' not found
+```
+
 The data are returned as a [*tibble*](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html) (a `tbl_df`), which shows a compact version of the data frame.
 
 
@@ -59,25 +63,7 @@ yh
 ```
 
 ```
-## Source: local data frame [690 x 13]
-## 
-##    Date/Time Mean Max Temp (°C) Mean Min Temp (°C) Mean Temp (°C)
-##        <chr>              <dbl>              <dbl>          <dbl>
-## 1    1943-01                 NA                 NA             NA
-## 2    1943-02              -16.2              -26.4          -21.3
-## 3    1943-03              -14.4              -29.4          -21.9
-## 4    1943-04                1.2              -12.3           -5.6
-## 5    1943-05                9.3               -3.6            2.9
-## 6    1943-06               17.6                2.4           10.0
-## 7    1943-07               20.6                9.6           15.1
-## 8    1943-08               18.9                7.2           13.1
-## 9    1943-09               10.9                2.0            6.5
-## 10   1943-10                6.1               -1.9            2.1
-## ..       ...                ...                ...            ...
-## Variables not shown: Extr Max Temp (°C) <dbl>, Extr Min Temp (°C) <dbl>,
-##   Total Rain (mm) <dbl>, Total Snow (cm) <dbl>, Total Precip (mm) <dbl>,
-##   Snow Grnd Last Day (cm) <int>, Dir of Max Gust (10's deg) <int>, Spd of
-##   Max Gust (km/h) <chr>, Station <dbl>.
+## Error in eval(expr, envir, enclos): object 'yh' not found
 ```
 
 You should be able to work with these objects mostly as if they were data frames.

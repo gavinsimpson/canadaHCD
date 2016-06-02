@@ -4,6 +4,7 @@
 ##'
 ##' @param file Either a path to a file, a connection. See argument \code{file} of \code{\link{read_csv}}.
 ##' @param flags Logical; should variable flag columns be preserved. The default results in these columns being dropped from the returned data.
+##' @param clean Logical; should variable names be cleaned? The default replaces the variable identifiers from the CSV files with more useful names for use in R code.
 ##' @param ... Further arguments passed to \code{\link{read_csv}}.
 ##'
 ##' @return A \code{\link{tbl_df}}.
@@ -12,6 +13,7 @@
 ##'
 ##' @importFrom readr read_csv count_fields locale tokenizer_csv type_convert
 ##' @importFrom tibble as_data_frame
+##' @importFrom zoo as.yearmon
 ##'
 ##' @export
 ##'
@@ -21,7 +23,8 @@
 ##'
 ##' ## read a daily data file
 ##' read_hcd(system.file("extdata/2855-daily-data-2015.csv", package = "canadaHCD"))
-`read_hcd` <- function(file, flags = FALSE, ...) {
+`read_hcd` <- function(file, flags = FALSE, clean = TRUE, ...) {
+    Date <- NULL                        # to kill the global variable NOTE!
     nfields <- count_fields(file, tokenizer_csv(), n_max = 26L)
     SKIP <- which(nfields == max(nfields))[1L] - 1L
     types <- ifelse(SKIP == 25L, paste0("Diiic", paste0(rep("dc", 8L), collapse = ""), "iciccc"),
@@ -32,11 +35,45 @@
     df <- as_data_frame(df)
     ## drop Year Month Day Time columns if exist
     df <- df[, !names(df) %in% c("Year", "Month", "Day", "Time")]
+
+    ## clean variables names
+    if (isTRUE(clean)) {
+        names(df) <-
+            if (inherits(df[[1]], "Date")) { # must be daily
+                c("Date","Data Quality",
+                  "MaxTemp","MaxTempFlag","MinTemp","MinTempFlag","MeanTemp",
+                  "MeanTempFlag","HeatDegDays","HeatDegDaysFlag","CoolDegDays",
+                  "CoolDegDaysFlag","TotalRain","TotalRainFlag","TotalSnow",
+                  "TotalSnowFlag","TotalPrecip","TotalPrecipFlag","GroundSnow",
+                  "GroundSnowFlag","MaxGustDir","MaxGustDirFlag","MaxGustSpeed",
+                  "MaxGustSpeedFlag")
+            } else if (inherits(df[[1]], "POSIXt")) { # must be hourly
+                c("DateTime","Data Quality",
+                  "Temp","TempFlag","DewPointTemp","DewPointTempFlag",
+                  "RelHumidity","RelHumidityFlag","WindDir","WindDirFlag",
+                  "WindSpeed","WindSpeedFlag","Visibility","VisibilityFlag",
+                  "Pressure","PressureFlag","Humidex","HumidexFlag","WindChill",
+                  "WindChillFlag","Weather")
+            } else {                    # must be monthly
+                c("Date","MaxTemp","MaxTempFlag","MinTemp","MinTempFlag",
+                  "MeanTemp","MeanTempFlag","ExtremeHigh","ExtremeHighFlag","ExtremeLow",
+                  "ExtremeLowFlag","TotalRain","TotalRainFlag","TotalSnow",
+                  "TotalSnowFlag","TotalPrecip","TotalPrecipFlag","LastSnowGrnd",
+                  "LastSnowGrndFlag","MaxGustDir","MaxGustDirFlag","MaxGustSpeed",
+                  "MaxGustSpeedFlag")
+            }
+    }
+
     ## keep flag columns?
     flagCols <- grepl("Flag", names(df))
     if (!isTRUE(flags)) {
         df <- df[, !flagCols]
         df <- df[, !grepl("Data Quality", names(df))]
+    }
+
+    if (!(inherits(df[[1]], "Date") || inherits(df[[1]], "POSIXt"))) {
+        ## coerce Date/Time to Zoo yearmon object
+        df <- mutate(df, Date = as.yearmon(Date, format = "%Y-%m"))
     }
 
     ## return
