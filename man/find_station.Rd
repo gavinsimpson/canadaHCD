@@ -17,8 +17,6 @@ find_station(name = NULL, baseline = NULL, type = "hourly",
 \item{ignore.case}{logical; by default the search for station names is not case-sensitive.}
 
 \item{...}{Additional arguments passed to \code{\link{grep}}.}
-
-\item{ignore.case}{logical; by default the search for station names is not case-sensitive.}
 }
 \value{
 An object of class \code{"hcd_station_list"}, which is a \code{"tbl_df"}, containing details of any matching HCD stations.
@@ -28,7 +26,6 @@ Search for stations in the Historical Climate Data inventory by name, with the o
 }
 \examples{
 find_station("Regina")
-
 find_station("Yellowknife", baseline = c(1971, 2000), type = "hourly")
 }
 \author{

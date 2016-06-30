@@ -20,3 +20,7 @@ vignettes/*.pdf
 
 ## ignore backup files
 *~
+.Rproj.user
+
+# Ignore my project so it doesn't get into the pull reqs
+.canadaHCD.Rproj

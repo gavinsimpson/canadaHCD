@@ -6,7 +6,6 @@
 ##' @param ignore.case logical; by default the search for station names is not case-sensitive.
 ##' @param baseline vector; a vector with a start and end year for a desired baseline. It is not used by default.
 ##' @param type character; only used if a baseline is specified. Defaults to "hourly".
-##' @param ignore.case logical; by default the search for station names is not case-sensitive.
 ##' @param ... Additional arguments passed to \code{\link{grep}}.
 ##'
 ##' @return An object of class \code{"hcd_station_list"}, which is a \code{"tbl_df"}, containing details of any matching HCD stations.
@@ -18,8 +17,8 @@
 ##'
 ##' @examples
 ##' find_station("Regina")
-##'
 ##' find_station("Yellowknife", baseline = c(1971, 2000), type = "hourly")
+
 `find_station` <- function(name = NULL, baseline = NULL, type = "hourly", ignore.case = TRUE, ...) {
     take <- grep(name, station_data$Name, ignore.case = ignore.case, ...)
     data_vars <- NULL
