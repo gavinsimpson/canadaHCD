@@ -1,15 +1,18 @@
 ## Adapted from http://shiny.rstudio.com/gallery/basic-datatable.html
 
 library(shiny)
-
-# Load the ggplot2 package which provides
-# the 'mpg' dataset.
 library(canadaHCD)
+
+if(exists("customtable")) {
+  dataui <- customtable
+} else {
+  dataui <- canadaHCD:::station_data
+}
 
 # Define the overall UI
 shinyUI(
   fluidPage(
-    titlePanel("canadaHRM data inventory"),
+    titlePanel("canadaHCD data inventory"),
     
     # Create a new Row in the UI for selectInputs
     fluidRow(
@@ -17,7 +20,7 @@ shinyUI(
              selectInput("prov",
                          "Province:",
                          c("All",
-                           unique(as.character(canadaHCD:::station_data$Province))))
+                           unique(as.character(dataui$Province))))
     ),
     # Create a new row for the table.
     fluidRow(
