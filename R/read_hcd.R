@@ -26,7 +26,7 @@
 ##' read_hcd(system.file("extdata/2855-daily-data-2015.csv", package = "canadaHCD"))
 `read_hcd` <- function(file, flags = FALSE, clean = TRUE, ...) {
     Date <- NULL                        # to kill the global variable NOTE!
-    nfields <- count.fields(file, sep = ",", blank.lines.skip = FALSE)[1:26]
+    nfields <- count.fields(file, sep = ",", quote = "\"", blank.lines.skip = FALSE)[1:26]
     SKIP <- which(nfields == max(nfields))[1L] - 1L
     types <- ifelse(SKIP == 25L, paste0("Diiic", paste0(rep("dc", 8L), collapse = ""), "iciccc"),
              ifelse(SKIP == 18L, paste0("cii", paste0(rep("dc", 8L), collapse = ""), "iciccc"),
