@@ -17,7 +17,8 @@ Imports:
     tibble,
     curl,
     dplyr,
-    zoo
+    zoo,
+    geosphere
 Suggests:
     testthat,
     knitr,
