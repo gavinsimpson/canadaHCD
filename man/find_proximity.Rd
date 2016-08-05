@@ -7,13 +7,13 @@
 find_proximity(target, mindist = 0, maxdist = 100, sort = TRUE)
 }
 \arguments{
-\item{target}{numeric; number of the target (reference) station}
+\item{target}{numeric; either the number of the target (reference) station, or a vector of length 2 containing latitude and longitude}
 
-\item{mindist}{numeric; minimum distance from the target station (defaults to 0)}
+\item{mindist}{numeric; minimum distance from the target in km (defaults to 0)}
 
-\item{maxdist}{numeric; maximum distance from the target station (defaults to 100)}
+\item{maxdist}{numeric; maximum distance from the target in km (defaults to 100)}
 
-\item{sort}{Boolean; if set to TRUE (default), will sort the resultant table by distance from `target`}
+\item{sort}{Boolean; if TRUE (default), will sort the resultant table by distance from `target`}
 }
 \value{
 An object of class \code{"hcd_station_list"}, which is a \code{"tbl_df"}, containing details of any matching HCD stations.
