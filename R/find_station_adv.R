@@ -42,13 +42,14 @@
   }
   
   # Next, set the data we are interested in, if necessary
-  data_vars <- NULL
   if (!is.null(baseline)) {
     if (length(baseline) != 2 | baseline[1] > baseline[2]) stop("error: check baseline format")
     if (type == "hourly") data_vars <- c("HourlyFirstYr", "HourlyLastYr")
     if (type == "daily") data_vars <- c("DailyFirstYr", "DailyLastYr")
     if (type == "monthly") data_vars <- c("MonthlyFirstYr", "MonthlyLastYr")
-  } 
+  } else {
+    data_vars <- NULL
+  }
   
   # Make a table with the info we want
   vars_wanted <- c("Name", "Province", "StationID", "LatitudeDD", "LongitudeDD", data_vars)
@@ -64,7 +65,7 @@
       else if (is.na(df[i,7]) | df[i,7] < baseline[2]) index <- c(index, i)
     }
     # Delete those stations
-    df <- df[-index,]
+    if (!is.null(index)) df <- df[-index,]
   }
   
   # If `target` is not NULL, filter by distance to target
