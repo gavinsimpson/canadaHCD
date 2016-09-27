@@ -13,7 +13,8 @@
 ##' @export
 ##'
 ##' @importFrom curl curl_download
-##' @importFrom dplyr bind_rows mutate
+##' @importFrom tibble add_column
+##' @importFrom dplyr bind_rows
 `hcd_monthly` <- function(station, collapse = TRUE, progress = TRUE, ...) {
     ns <- length(station)
     urls <- paste0("http://climate.weather.gc.ca/climate_data/bulk_data_e.html?stationID=",
@@ -26,7 +27,7 @@
     if (collapse) {
         nr <- vapply(sdata, NROW, integer(1L))
         sdata <- bind_rows(sdata)
-        sdata <- mutate(sdata, Station = rep(station, times = nr))
+        sdata <- add_column(sdata, Station = rep(station, times = nr), .before = 1)
     }
 
     sdata
