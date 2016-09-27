@@ -12,7 +12,7 @@
 ##' @author Gavin L. Simpson
 ##'
 ##' @importFrom readr read_csv locale tokenizer_csv type_convert
-##' @importFrom tibble as_data_frame
+##' @importFrom tibble as_data_frame add_column
 ##' @importFrom zoo as.yearmon
 ##' @importFrom utils count.fields
 ##'
@@ -74,7 +74,7 @@
 
     if (!(inherits(df[[1]], "Date") || inherits(df[[1]], "POSIXt"))) {
         ## coerce Date/Time to Zoo yearmon object
-        df <- mutate(df, Date = as.yearmon(Date, format = "%Y-%m"))
+        df <- add_column(df, Date = as.yearmon(Date, format = "%Y-%m"), .before = 1)
     }
 
     ## return
