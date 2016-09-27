@@ -15,8 +15,7 @@
 ##' @export
 ##'
 ##' @importFrom curl curl_download
-##' @importFrom tibble add_column
-##' @importFrom dplyr bind_rows
+##' @importFrom dplyr bind_rows mutate
 `hcd_hourly` <- function(station, year, month, collapse = TRUE, progress = TRUE, ...) {
     expand <- expand.grid(station = station, year = year, month = month)
     ns <- NROW(expand)
@@ -30,7 +29,7 @@
     if (collapse) {
         nr <- vapply(sdata, NROW, integer(1L))
         sdata <- bind_rows(sdata)
-        sdata <- add_column(sdata, Station = rep(expand$station, times = nr), .before = 1)
+        sdata <- mutate(sdata, Station = rep(expand$station, times = nr))
     }
 
     sdata
