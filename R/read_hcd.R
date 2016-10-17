@@ -17,6 +17,7 @@
 ##' @importFrom tibble as_data_frame
 ##' @importFrom zoo as.yearmon
 ##' @importFrom utils count.fields
+##' @importFrom dplyr mutate
 ##'
 ##' @export
 ##'

@@ -14,7 +14,8 @@
 ##' @export
 ##'
 ##' @importFrom curl curl_download
-##' @importFrom dplyr bind_rows mutate
+##' @importFrom dplyr bind_rows
+##' @importFrom tibble add_column
 `hcd_daily` <- function(station, year, collapse = TRUE, progress = TRUE, ...) {
     expand <- expand.grid(station = station, year = year)
     ns <- NROW(expand)
@@ -26,9 +27,7 @@
     sdata <- process_downloads(urls, progress = progress, ...)
     ## collapse multiple stations to a single tbl_df
     if (collapse) {
-        nr <- vapply(sdata, NROW, integer(1L))
-        sdata <- bind_rows(sdata)
-        sdata <- mutate(sdata, Station = rep(expand$station, times = nr))
+        sdata <- collapse_hcd(sdata, expand$station)
     }
     sdata
 }

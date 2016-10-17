@@ -13,7 +13,6 @@
 ##' @export
 ##'
 ##' @importFrom curl curl_download
-##' @importFrom dplyr bind_rows mutate
 `hcd_monthly` <- function(station, collapse = TRUE, progress = TRUE, ...) {
     ns <- length(station)
     urls <- paste0("http://climate.weather.gc.ca/climate_data/bulk_data_e.html?stationID=",
@@ -24,9 +23,7 @@
 
     ## collapse multiple stations to a single tbl_df
     if (collapse) {
-        nr <- vapply(sdata, NROW, integer(1L))
-        sdata <- bind_rows(sdata)
-        sdata <- mutate(sdata, Station = rep(station, times = nr))
+        sdata <- collapse_hcd(sdata, station)
     }
 
     sdata
