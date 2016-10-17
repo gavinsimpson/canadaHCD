@@ -30,8 +30,7 @@ find_station("Yellowknife")
 ```
 
 ```
-## Source: local data frame [7 x 5]
-## 
+## # A tibble: 7 × 5
 ##                    Name              Province StationID LatitudeDD
 ##                  <fctr>                <fctr>    <fctr>      <dbl>
 ## 1         YELLOWKNIFE A Northwest Territories      1706      62.46
@@ -41,7 +40,7 @@ find_station("Yellowknife")
 ## 5  YELLOWKNIFE CON MINE Northwest Territories      8949      62.47
 ## 6        YELLOWKNIFE CS Northwest Territories     27338      62.47
 ## 7     YELLOWKNIFE HYDRO Northwest Territories      1707      62.67
-## Variables not shown: LongitudeDD <dbl>.
+## # ... with 1 more variables: LongitudeDD <dbl>
 ```
 
 To download the monthly HCD from `YELLOWKNIFE HYDRO` I can use `hcd_monthly()`, providing it with the `StationID` for that particular weather station
@@ -49,10 +48,6 @@ To download the monthly HCD from `YELLOWKNIFE HYDRO` I can use `hcd_monthly()`, 
 
 ```r
 yh <- hcd_monthly(1707)
-```
-
-```
-## Error in as.yearmon(as.character(`Date/Time`), format = "%Y-%m"): object 'Date/Time' not found
 ```
 
 The data are returned as a [*tibble*](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html) (a `tbl_df`), which shows a compact version of the data frame.
@@ -63,7 +58,22 @@ yh
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'yh' not found
+## # A tibble: 690 × 13
+##        Date MaxTemp MinTemp MeanTemp ExtremeHigh ExtremeLow TotalRain
+##       <dbl>   <dbl>   <dbl>    <dbl>       <dbl>      <dbl>     <dbl>
+## 1  1943.000      NA      NA       NA          NA         NA        NA
+## 2  1943.083   -16.2   -26.4    -21.3         1.1      -44.4       0.0
+## 3  1943.167   -14.4   -29.4    -21.9        -3.3      -40.6       0.0
+## 4  1943.250     1.2   -12.3     -5.6        12.2      -31.7       0.0
+## 5  1943.333     9.3    -3.6      2.9        20.0      -11.7       9.9
+## 6  1943.417    17.6     2.4     10.0        27.2       -1.7       4.8
+## 7  1943.500    20.6     9.6     15.1        27.2        4.4      36.6
+## 8  1943.583    18.9     7.2     13.1        27.2        1.7      17.8
+## 9  1943.667    10.9     2.0      6.5        18.3       -6.1       5.8
+## 10 1943.750     6.1    -1.9      2.1        17.2      -15.6      19.1
+## # ... with 680 more rows, and 6 more variables: TotalSnow <dbl>,
+## #   TotalPrecip <dbl>, LastSnowGrnd <int>, MaxGustDir <int>,
+## #   MaxGustSpeed <chr>, Station <dbl>
 ```
 
 You should be able to work with these objects mostly as if they were data frames.
@@ -76,8 +86,7 @@ canadaHCD:::station_data
 ```
 
 ```
-## Source: local data frame [12,565 x 19]
-## 
+## # A tibble: 12,565 × 19
 ##                      Name         Province ClimateID StationID  WMOID
 ##                    <fctr>           <fctr>    <fctr>    <fctr> <fctr>
 ## 1             ACTIVE PASS British Columbia   1010066        14     NA
@@ -90,11 +99,11 @@ canadaHCD:::station_data
 ## 8   BRENTWOOD CLARKE ROAD British Columbia   1010961        21     NA
 ## 9  BRENTWOOD W SAANICH RD British Columbia   1010965        22     NA
 ## 10             BEAR CREEK British Columbia   1010PJR      9634     NA
-## ..                    ...              ...       ...       ...    ...
-## Variables not shown: TCID <fctr>, LatitudeDD <dbl>, LongitudeDD <dbl>,
-##   Latitude <int>, Longitude <int>, Elevation <dbl>, FirstYear <int>,
-##   LastYear <int>, HourlyFirstYr <int>, HourlyLastYr <int>, DailyFirstYr
-##   <int>, DailyLastYr <int>, MonthlyFirstYr <int>, MonthlyLastYr <int>.
+## # ... with 12,555 more rows, and 14 more variables: TCID <fctr>,
+## #   LatitudeDD <dbl>, LongitudeDD <dbl>, Latitude <int>, Longitude <int>,
+## #   Elevation <dbl>, FirstYear <int>, LastYear <int>, HourlyFirstYr <int>,
+## #   HourlyLastYr <int>, DailyFirstYr <int>, DailyLastYr <int>,
+## #   MonthlyFirstYr <int>, MonthlyLastYr <int>
 ```
 
 If we wanted to know which resolutions of data were available for the `YELLOWKNIFE HYDRO` station, we can extract certain columns from the station data object
@@ -108,12 +117,11 @@ canadaHCD:::station_data[id, vars]
 ```
 
 ```
-## Source: local data frame [1 x 6]
-## 
+## # A tibble: 1 × 6
 ##   HourlyFirstYr HourlyLastYr DailyFirstYr DailyLastYr MonthlyFirstYr
 ##           <int>        <int>        <int>       <int>          <int>
 ## 1            NA           NA         1943        2000           1943
-## Variables not shown: MonthlyLastYr <int>.
+## # ... with 1 more variables: MonthlyLastYr <int>
 ```
 
 The output shows that this station has no hourly data, but daily and monthly data sets exist.
