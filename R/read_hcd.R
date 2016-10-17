@@ -11,9 +11,12 @@
 ##'
 ##' @author Gavin L. Simpson
 ##'
-##' @importFrom readr read_csv count_fields locale tokenizer_csv type_convert
+##' ## FIXME: if hadley fixes the bug in count_fields, add it back here as import from readr & remove utils import
+##'
+##' @importFrom readr read_csv locale tokenizer_csv type_convert
 ##' @importFrom tibble as_data_frame
 ##' @importFrom zoo as.yearmon
+##' @importFrom utils count.fields
 ##'
 ##' @export
 ##'
@@ -25,7 +28,9 @@
 ##' read_hcd(system.file("extdata/2855-daily-data-2015.csv", package = "canadaHCD"))
 `read_hcd` <- function(file, flags = FALSE, clean = TRUE, ...) {
     Date <- NULL                        # to kill the global variable NOTE!
-    nfields <- count_fields(file, tokenizer_csv(), n_max = 26L)
+    ## FIXME: this is what we want if readr::count_fields is fixed:
+    ## nfields <- count_fields(file, tokenizer_csv(), n_max = 26L)
+    nfields <- count.fields(file, sep = ",", quote = "\"", blank.lines.skip = FALSE)[1:26]
     SKIP <- which(nfields == max(nfields))[1L] - 1L
     types <- ifelse(SKIP == 25L, paste0("Diiic", paste0(rep("dc", 8L), collapse = ""), "iciccc"),
              ifelse(SKIP == 18L, paste0("cii", paste0(rep("dc", 8L), collapse = ""), "iciccc"),
