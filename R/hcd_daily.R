@@ -12,10 +12,6 @@
 ##' @author Gavin L. Simpson
 ##'
 ##' @export
-##'
-##' @importFrom curl curl_download
-##' @importFrom dplyr bind_rows
-##' @importFrom tibble add_column
 `hcd_daily` <- function(station, year, collapse = TRUE, progress = TRUE, ...) {
     expand <- expand.grid(station = station, year = year)
     ns <- NROW(expand)

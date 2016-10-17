@@ -11,8 +11,6 @@
 ##' @author Gavin L. Simpson
 ##'
 ##' @export
-##'
-##' @importFrom curl curl_download
 `hcd_monthly` <- function(station, collapse = TRUE, progress = TRUE, ...) {
     ns <- length(station)
     urls <- paste0("http://climate.weather.gc.ca/climate_data/bulk_data_e.html?stationID=",

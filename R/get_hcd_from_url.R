@@ -1,3 +1,4 @@
+##' @importFrom curl curl_download
 get_hcd_from_url <- function(URL, ...) {
     tmp <- tempfile()
     f <- curl_download(URL, destfile = tmp)

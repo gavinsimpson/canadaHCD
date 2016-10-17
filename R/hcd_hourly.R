@@ -13,8 +13,6 @@
 ##' @author Gavin L. Simpson
 ##'
 ##' @export
-##'
-##' @importFrom curl curl_download
 `hcd_hourly` <- function(station, year, month, collapse = TRUE, progress = TRUE, ...) {
     expand <- expand.grid(station = station, year = year, month = month)
     ns <- NROW(expand)
