@@ -33,9 +33,13 @@
     ## nfields <- count_fields(file, tokenizer_csv(), n_max = 26L)
     nfields <- count.fields(file, sep = ",", quote = "\"", blank.lines.skip = FALSE)[1:26]
     SKIP <- which(nfields == max(nfields))[1L] - 1L
-    types <- ifelse(SKIP == 25L, paste0("Diiic", paste0(rep("dc", 8L), collapse = ""), "iciccc"),
-             ifelse(SKIP == 18L, paste0("cii", paste0(rep("dc", 8L), collapse = ""), "iciccc"),
-                    c("Tiiiccdcdcicicic?cdc?cicc")))
+    hourlyTypes  <- "Tiiiccdcdcicicicdcdcicicc"
+    dailyTypes   <- paste0("Diiic", paste0(rep("dc", 8L), collapse = ""), "iciccc")
+    monthlyTypes <- paste0("cii", paste0(rep("dc", 8L), collapse = ""), "iciccc")
+    types <- switch(as.character(SKIP),
+                    "25" = dailyTypes,
+                    "18" = monthlyTypes,
+                    "16" = hourlyTypes)
     df <- read_csv(file, skip = SKIP, locale = locale(encoding = "ISO-8859-1"),
                    col_types = types, ...)
     df <- as_data_frame(df)
