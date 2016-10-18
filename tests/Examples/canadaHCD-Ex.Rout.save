@@ -1,5 +1,5 @@
 
-R version 3.3.0 Patched (2016-05-17 r70629) -- "Supposedly Educational"
+R version 3.3.1 Patched (2016-10-10 r71494) -- "Bug in Your Hair"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -36,8 +36,7 @@ Type 'q()' to quit R.
 > ### ** Examples
 > 
 > find_station("Regina")
-Source: local data frame [30 x 5]
-
+# A tibble: 30 × 5
                          Name     Province StationID LatitudeDD LongitudeDD
                        <fctr>       <fctr>    <fctr>      <dbl>       <dbl>
 1                      REGINA Saskatchewan      7450         NA          NA
@@ -50,11 +49,10 @@ Source: local data frame [30 x 5]
 8               REGINA INTL A Saskatchewan     51441      50.43     -104.67
 9             REGINA AP STN A Saskatchewan      7452      50.43     -104.62
 10            REGINA AP STN B Saskatchewan      7453      50.42     -104.62
-..                        ...          ...       ...        ...         ...
+# ... with 20 more rows
 > 
 > find_station("Yellowknife")
-Source: local data frame [7 x 5]
-
+# A tibble: 7 × 5
                    Name              Province StationID LatitudeDD LongitudeDD
                  <fctr>                <fctr>    <fctr>      <dbl>       <dbl>
 1         YELLOWKNIFE A Northwest Territories      1706      62.46     -114.44
@@ -81,8 +79,7 @@ Source: local data frame [7 x 5]
 > 
 > ## read a monthly data file
 > read_hcd(system.file("extdata/2855-monthly-data.csv", package = "canadaHCD"))
-Source: local data frame [515 x 12]
-
+# A tibble: 515 × 12
             Date MaxTemp MinTemp MeanTemp ExtremeHigh ExtremeLow TotalRain
    <S3: yearmon>   <dbl>   <dbl>    <dbl>       <dbl>      <dbl>     <dbl>
 1       Jan 1965      NA      NA       NA          NA         NA        NA
@@ -95,14 +92,12 @@ Source: local data frame [515 x 12]
 8       Aug 1965    24.6     9.1     16.9        36.1        1.7      60.7
 9       Sep 1965    10.4     0.1      5.3        24.4       -8.3     105.4
 10      Oct 1965    14.1    -0.6      6.8        21.1       -6.1       0.0
-..           ...     ...     ...      ...         ...        ...       ...
-Variables not shown: TotalSnow <dbl>, TotalPrecip <dbl>, LastSnowGrnd <int>,
-  MaxGustDir <int>, MaxGustSpeed <chr>.
+# ... with 505 more rows, and 5 more variables: TotalSnow <dbl>,
+#   TotalPrecip <dbl>, LastSnowGrnd <int>, MaxGustDir <int>, MaxGustSpeed <chr>
 > 
 > ## read a daily data file
 > read_hcd(system.file("extdata/2855-daily-data-2015.csv", package = "canadaHCD"))
-Source: local data frame [365 x 12]
-
+# A tibble: 365 × 12
          Date MaxTemp MinTemp MeanTemp HeatDegDays CoolDegDays TotalRain
        <date>   <dbl>   <dbl>    <dbl>       <dbl>       <dbl>     <dbl>
 1  2015-01-01    -4.9   -12.7     -8.8        26.8           0        NA
@@ -115,9 +110,8 @@ Source: local data frame [365 x 12]
 8  2015-01-08   -13.2   -21.7    -17.5        35.5           0        NA
 9  2015-01-09   -18.9   -24.1    -21.5        39.5           0        NA
 10 2015-01-10   -20.9   -27.5    -24.2        42.2           0        NA
-..        ...     ...     ...      ...         ...         ...       ...
-Variables not shown: TotalSnow <dbl>, TotalPrecip <dbl>, GroundSnow <int>,
-  MaxGustDir <int>, MaxGustSpeed <chr>.
+# ... with 355 more rows, and 5 more variables: TotalSnow <dbl>,
+#   TotalPrecip <dbl>, GroundSnow <int>, MaxGustDir <int>, MaxGustSpeed <chr>
 > 
 > 
 > 
@@ -125,7 +119,7 @@ Variables not shown: TotalSnow <dbl>, TotalPrecip <dbl>, GroundSnow <int>,
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.984 0.022 1.007 0 0 
+Time elapsed:  1.212 0.023 1.237 0 0 
 > grDevices::dev.off()
 null device 
           1 
