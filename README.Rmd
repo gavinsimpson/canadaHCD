@@ -8,7 +8,7 @@ Access Canadian Historical Climate Data from R. The Government of Canada's Histo
 These are raw data that have undergone some quality control, but issues such as changes in station location are unmanged; the data for the original `stationID` stops at a certain point and a new `stationID` continues recording. For a more curated data set for climate change research at broad spatial and temporal scales see the [Adjusted and Homogenized Canadian Climate Data (AHCCD)](http://ec.gc.ca/dccha-ahccd/default.asp?lang=En&n=B1F8423A-1).
 
 #### Released version
-[![CRAN version](http://www.r-pkg.org/badges/version/canadaHCD)](http://cran.rstudio.com/web/packages/canadaHCD/index.html) [![](http://cranlogs.r-pkg.org/badges/grand-total/canadaHCD)](http://cran.rstudio.com/web/packages/canadaHCD/index.html)
+[![CRAN version](http://www.r-pkg.org/badges/version/canadaHCD)](https://cran.r-project.org/package=canadaHCD) [![](http://cranlogs.r-pkg.org/badges/grand-total/canadaHCD)](https://cran.r-project.org/package=canadaHCD)
 
 #### Build status
 [![Build Status](https://travis-ci.org/gavinsimpson/canadaHCD.svg?branch=master)](https://travis-ci.org/gavinsimpson/canadaHCD)  [![Build status](https://ci.appveyor.com/api/projects/status/e3ptg9drviavci71/branch/master?svg=true)](https://ci.appveyor.com/project/gavinsimpson/canadahcd/branch/master)  [![codecov.io](https://codecov.io/github/gavinsimpson/canadaHCD/coverage.svg?branch=master)](https://codecov.io/github/gavinsimpson/canadaHCD?branch=master)
