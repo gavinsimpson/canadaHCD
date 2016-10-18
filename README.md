@@ -62,32 +62,32 @@ The data are returned as a [*tibble*](https://cran.r-project.org/web/packages/ti
 ```r
 yh
 #> # A tibble: 690 × 13
-#>        Date MaxTemp MinTemp MeanTemp ExtremeHigh ExtremeLow TotalRain
-#>       <dbl>   <dbl>   <dbl>    <dbl>       <dbl>      <dbl>     <dbl>
-#> 1  1943.000      NA      NA       NA          NA         NA        NA
-#> 2  1943.083   -16.2   -26.4    -21.3         1.1      -44.4       0.0
-#> 3  1943.167   -14.4   -29.4    -21.9        -3.3      -40.6       0.0
-#> 4  1943.250     1.2   -12.3     -5.6        12.2      -31.7       0.0
-#> 5  1943.333     9.3    -3.6      2.9        20.0      -11.7       9.9
-#> 6  1943.417    17.6     2.4     10.0        27.2       -1.7       4.8
-#> 7  1943.500    20.6     9.6     15.1        27.2        4.4      36.6
-#> 8  1943.583    18.9     7.2     13.1        27.2        1.7      17.8
-#> 9  1943.667    10.9     2.0      6.5        18.3       -6.1       5.8
-#> 10 1943.750     6.1    -1.9      2.1        17.2      -15.6      19.1
-#>    TotalSnow TotalPrecip LastSnowGrnd MaxGustDir
-#>        <dbl>       <dbl>        <int>      <int>
-#> 1         NA          NA           NA         NA
-#> 2        9.4         9.4           NA         NA
-#> 3        2.8         2.8           NA         NA
-#> 4       18.0        18.0           NA         NA
-#> 5        2.8        12.7           NA         NA
-#> 6        0.0         4.8           NA         NA
-#> 7        0.0        36.6           NA         NA
-#> 8        0.0        17.8           NA         NA
-#> 9        2.8         8.6           NA         NA
-#> 10       5.1        24.1           NA         NA
-#> # ... with 680 more rows, and 2 more variables: MaxGustSpeed <chr>,
-#> #   Station <dbl>
+#>    Station     Date MaxTemp MinTemp MeanTemp ExtremeHigh ExtremeLow
+#>      <dbl>    <dbl>   <dbl>   <dbl>    <dbl>       <dbl>      <dbl>
+#> 1     1707 1943.000      NA      NA       NA          NA         NA
+#> 2     1707 1943.083   -16.2   -26.4    -21.3         1.1      -44.4
+#> 3     1707 1943.167   -14.4   -29.4    -21.9        -3.3      -40.6
+#> 4     1707 1943.250     1.2   -12.3     -5.6        12.2      -31.7
+#> 5     1707 1943.333     9.3    -3.6      2.9        20.0      -11.7
+#> 6     1707 1943.417    17.6     2.4     10.0        27.2       -1.7
+#> 7     1707 1943.500    20.6     9.6     15.1        27.2        4.4
+#> 8     1707 1943.583    18.9     7.2     13.1        27.2        1.7
+#> 9     1707 1943.667    10.9     2.0      6.5        18.3       -6.1
+#> 10    1707 1943.750     6.1    -1.9      2.1        17.2      -15.6
+#>    TotalRain TotalSnow TotalPrecip LastSnowGrnd
+#>        <dbl>     <dbl>       <dbl>        <int>
+#> 1         NA        NA          NA           NA
+#> 2        0.0       9.4         9.4           NA
+#> 3        0.0       2.8         2.8           NA
+#> 4        0.0      18.0        18.0           NA
+#> 5        9.9       2.8        12.7           NA
+#> 6        4.8       0.0         4.8           NA
+#> 7       36.6       0.0        36.6           NA
+#> 8       17.8       0.0        17.8           NA
+#> 9        5.8       2.8         8.6           NA
+#> 10      19.1       5.1        24.1           NA
+#> # ... with 680 more rows, and 2 more variables: MaxGustDir <int>,
+#> #   MaxGustSpeed <chr>
 ```
 
 You should be able to work with these objects mostly as if they were data frames.
