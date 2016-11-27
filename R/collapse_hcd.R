@@ -12,9 +12,9 @@
 ##' @importFrom tibble add_column
 `collapse_hcd` <- function(l, station) {
     nr <- vapply(l, NROW, integer(1L))
-    if (class(l$Date) == "yearmon") fix = TRUE
+    fixym <- class(l$Date) == "yearmon"
     l <- bind_rows(l)
-    if (fix) l$Date <- as.yearmon(l$Date)
+    if (fixym) l$Date <- as.yearmon(l$Date)
     l <- add_column(l, Station = rep(station, times = nr),
                     .before = 1)
     l
