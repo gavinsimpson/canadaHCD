@@ -21,6 +21,11 @@ A character vector containing URLs for the requested stations and time scales.
 \description{
 Form URLs to requested Canadian Historical Climate Data records.
 }
+\examples{
+urls <- hcd_url(c(2855, 1707), timescale = "monthly")
+urls
+head(urls$url)
+}
 \author{
 Gavin L. Simpson
 }

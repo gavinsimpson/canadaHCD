@@ -11,6 +11,11 @@
 ##' @author Gavin L. Simpson
 ##'
 ##' @export
+##'
+##' @examples
+##' urls <- hcd_url(c(2855, 1707), timescale = "monthly")
+##' urls
+##' head(urls$url)
 `hcd_url` <- function(station, timescale = c("monthly", "daily", "hourly"),
                       year, month) {
     timescale <- match.arg(timescale)
