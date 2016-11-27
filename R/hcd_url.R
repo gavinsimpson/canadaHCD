@@ -21,12 +21,16 @@
     urls
 }
 
+##' @importFrom tibble data_frame
 `hcd_url_monthly` <- function(station) {
-    paste0("http://climate.weather.gc.ca/climate_data/bulk_data_e.html?stationID=",
-           station, "&Year=2000&Month=1&Day=14&format=csv&timeframe=3",
-           "&submit=%20Download+Data")
+    urls <- paste0("http://climate.weather.gc.ca/climate_data/bulk_data_e.html?stationID=",
+                   station, "&Year=2000&Month=1&Day=14&format=csv&timeframe=3",
+                   "&submit=%20Download+Data")
+    urls <- data_frame(station = station, url = urls)
+    urls
 }
 
+##' @importFrom tibble as_data_frame add_column
 `hcd_url_daily` <- function(station, year) {
     expand <- expand.grid(station = station, year = year)
     urls <- paste0("http://climate.weather.gc.ca/climate_data/bulk_data_e.html?stationID=",
@@ -36,6 +40,7 @@
     urls
 }
 
+##' @importFrom tibble as_data_frame add_column
 `hcd_url_hourly` <- function(station, year, month) {
     expand <- expand.grid(station = station, year = year, month = month)
     urls <- paste0("http://climate.weather.gc.ca/climate_data/bulk_data_e.html?stationID=",

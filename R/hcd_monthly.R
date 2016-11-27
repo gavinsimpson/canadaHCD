@@ -16,11 +16,11 @@
     urls <- hcd_url(station, timescale = "monthly")
 
     ## Download data
-    sdata <- process_downloads(urls, progress = progress, ...)
+    sdata <- process_downloads(urls$url, progress = progress, ...)
 
     ## collapse multiple stations to a single tbl_df
     if (collapse) {
-        sdata <- collapse_hcd(sdata, station)
+        sdata <- collapse_hcd(sdata, urls$station)
     }
 
     sdata
