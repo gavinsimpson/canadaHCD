@@ -14,15 +14,13 @@
 ##'
 ##' @export
 `hcd_hourly` <- function(station, year, month, collapse = TRUE, progress = TRUE, ...) {
-    expand <- expand.grid(station = station, year = year, month = month)
     ## Generate URLs
-    urls <- hcd_url(expand$station, timescale = "hourly",
-                    year = expand$year, month = expand$month)
+    urls <- hcd_url(station, timescale = "hourly", year = year, month = month)
     ## Download data
-    sdata <- process_downloads(urls, progress = progress, ...)
+    sdata <- process_downloads(urls$url, progress = progress, ...)
     ## collapse multiple stations to a single tbl_df
     if (collapse) {
-        sdata <- collapse_hcd(sdata, expand$station)
+        sdata <- collapse_hcd(sdata, urls$station)
     }
 
     sdata
