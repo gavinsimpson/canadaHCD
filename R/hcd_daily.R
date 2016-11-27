@@ -13,14 +13,13 @@
 ##'
 ##' @export
 `hcd_daily` <- function(station, year, collapse = TRUE, progress = TRUE, ...) {
-    expand <- expand.grid(station = station, year = year)
     ## Generate URLs
-    urls <- hcd_url(expand$station, timescale = "daily", year = expand$year)
+    urls <- hcd_url(station, timescale = "daily", year = year)
     ## Download data
-    sdata <- process_downloads(urls, progress = progress, ...)
+    sdata <- process_downloads(urls$url, progress = progress, ...)
     ## collapse multiple stations to a single tbl_df
     if (collapse) {
-        sdata <- collapse_hcd(sdata, expand$station)
+        sdata <- collapse_hcd(sdata, urls$station)
     }
     sdata
 }
