@@ -19,10 +19,14 @@
 `hcd_url` <- function(station, timescale = c("monthly", "daily", "hourly"),
                       year, month) {
     timescale <- match.arg(timescale)
+    station <- as.integer(station)
     urls <- switch(timescale,
                    "monthly" = hcd_url_monthly(station),
-                   "daily"   = hcd_url_daily(station, year = year),
-                   "hourly"  = hcd_url_hourly(station, year = year, month = month))
+                   "daily"   = hcd_url_daily(station,
+                                             year = as.integer(year)),
+                   "hourly"  = hcd_url_hourly(station,
+                                              year = as.integer(year),
+                                              month = as.integer(month)))
     urls
 }
 
