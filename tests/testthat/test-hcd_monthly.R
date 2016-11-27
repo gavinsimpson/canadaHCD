@@ -10,6 +10,12 @@ test_that("hcd_monthly(n) returns a tbl_df", {
     expect_that(df, is_a("tbl_df"))
 })
 
+## test that a HCD Monthly object always has a yearmon class Date variable
+test_that("hcd_monthly(n) Date variables is class 'yearmon'", {
+    skip_on_cran()
+    expect_that(df$Date, is_a("yearmon"))
+})
+
 ## test downloading of multiple files from HCD dataset
 test_that("hcd_monthly(n) works with multiple stations", {
     skip_on_cran()
@@ -21,4 +27,3 @@ test_that("hcd_monthly(n) works with multiple stations", {
     expect_that(df[[1]], is_a("tbl_df"))
     expect_that(df[[2]], is_a("tbl_df"))
 })
-
