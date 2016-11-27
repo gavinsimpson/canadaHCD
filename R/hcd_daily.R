@@ -13,17 +13,13 @@
 ##'
 ##' @export
 `hcd_daily` <- function(station, year, collapse = TRUE, progress = TRUE, ...) {
-    expand <- expand.grid(station = station, year = year)
-    ns <- NROW(expand)
-    urls <- with(expand,
-                 paste0("http://climate.weather.gc.ca/climate_data/bulk_data_e.html?stationID=",
-                        station, "&Year=", year, "&Month=1&Day=14&format=csv&timeframe=2",
-                        "&submit=%20Download+Data"))
+    ## Generate URLs
+    urls <- hcd_url(station, timescale = "daily", year = year)
     ## Download data
-    sdata <- process_downloads(urls, progress = progress, ...)
+    sdata <- process_downloads(urls$url, progress = progress, ...)
     ## collapse multiple stations to a single tbl_df
     if (collapse) {
-        sdata <- collapse_hcd(sdata, expand$station)
+        sdata <- collapse_hcd(sdata, urls$station)
     }
     sdata
 }

@@ -12,16 +12,15 @@
 ##'
 ##' @export
 `hcd_monthly` <- function(station, collapse = TRUE, progress = TRUE, ...) {
-    ns <- length(station)
-    urls <- paste0("http://climate.weather.gc.ca/climate_data/bulk_data_e.html?stationID=",
-                  station, "&Year=2000&Month=1&Day=14&format=csv&timeframe=3",
-                  "&submit=%20Download+Data")
+    ## Generate URLs
+    urls <- hcd_url(station, timescale = "monthly")
+
     ## Download data
-    sdata <- process_downloads(urls, progress = progress, ...)
+    sdata <- process_downloads(urls$url, progress = progress, ...)
 
     ## collapse multiple stations to a single tbl_df
     if (collapse) {
-        sdata <- collapse_hcd(sdata, station)
+        sdata <- collapse_hcd(sdata, urls$station)
     }
 
     sdata
