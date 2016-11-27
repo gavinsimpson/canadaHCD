@@ -15,11 +15,9 @@
 ##' @export
 `hcd_hourly` <- function(station, year, month, collapse = TRUE, progress = TRUE, ...) {
     expand <- expand.grid(station = station, year = year, month = month)
-    ns <- NROW(expand)
-    urls <- with(expand,
-                 paste0("http://climate.weather.gc.ca/climate_data/bulk_data_e.html?stationID=",
-                        station, "&Year=", year, "&Month=", month, "&Day=14&format=csv&timeframe=1",
-                        "&submit=%20Download+Data"))
+    ## Generate URLs
+    urls <- hcd_url(expand$station, timescale = "hourly",
+                    year = expand$year, month = expand$month)
     ## Download data
     sdata <- process_downloads(urls, progress = progress, ...)
     ## collapse multiple stations to a single tbl_df
