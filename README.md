@@ -62,18 +62,18 @@ The data are returned as a [*tibble*](https://cran.r-project.org/web/packages/ti
 ```r
 yh
 #> # A tibble: 690 × 13
-#>    Station     Date MaxTemp MinTemp MeanTemp ExtremeHigh ExtremeLow
-#>      <dbl>    <dbl>   <dbl>   <dbl>    <dbl>       <dbl>      <dbl>
-#> 1     1707 1943.000      NA      NA       NA          NA         NA
-#> 2     1707 1943.083   -16.2   -26.4    -21.3         1.1      -44.4
-#> 3     1707 1943.167   -14.4   -29.4    -21.9        -3.3      -40.6
-#> 4     1707 1943.250     1.2   -12.3     -5.6        12.2      -31.7
-#> 5     1707 1943.333     9.3    -3.6      2.9        20.0      -11.7
-#> 6     1707 1943.417    17.6     2.4     10.0        27.2       -1.7
-#> 7     1707 1943.500    20.6     9.6     15.1        27.2        4.4
-#> 8     1707 1943.583    18.9     7.2     13.1        27.2        1.7
-#> 9     1707 1943.667    10.9     2.0      6.5        18.3       -6.1
-#> 10    1707 1943.750     6.1    -1.9      2.1        17.2      -15.6
+#>    Station          Date MaxTemp MinTemp MeanTemp ExtremeHigh ExtremeLow
+#>      <dbl> <S3: yearmon>   <dbl>   <dbl>    <dbl>       <dbl>      <dbl>
+#> 1     1707      Jan 1943      NA      NA       NA          NA         NA
+#> 2     1707      Feb 1943   -16.2   -26.4    -21.3         1.1      -44.4
+#> 3     1707      Mar 1943   -14.4   -29.4    -21.9        -3.3      -40.6
+#> 4     1707      Apr 1943     1.2   -12.3     -5.6        12.2      -31.7
+#> 5     1707      May 1943     9.3    -3.6      2.9        20.0      -11.7
+#> 6     1707      Jun 1943    17.6     2.4     10.0        27.2       -1.7
+#> 7     1707      Jul 1943    20.6     9.6     15.1        27.2        4.4
+#> 8     1707      Aug 1943    18.9     7.2     13.1        27.2        1.7
+#> 9     1707      Sep 1943    10.9     2.0      6.5        18.3       -6.1
+#> 10    1707      Oct 1943     6.1    -1.9      2.1        17.2      -15.6
 #>    TotalRain TotalSnow TotalPrecip LastSnowGrnd
 #>        <dbl>     <dbl>       <dbl>        <int>
 #> 1         NA        NA          NA           NA
