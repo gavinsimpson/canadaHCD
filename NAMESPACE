@@ -2,6 +2,7 @@
 
 export(find_station)
 export(hcd_daily)
+export(hcd_download)
 export(hcd_hourly)
 export(hcd_monthly)
 export(hcd_url)
