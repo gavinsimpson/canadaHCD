@@ -4,10 +4,15 @@
 \alias{find_station}
 \title{Find a Historical Climate Data station}
 \usage{
-find_station(name = NULL, ignore.case = TRUE, ...)
+find_station(name = NULL, baseline = NULL, type = "hourly",
+  ignore.case = TRUE, ...)
 }
 \arguments{
 \item{name}{character; character string or a regular expression to be matched against known station names. See \code{\link{grep}} for details.}
+
+\item{baseline}{vector; a vector with a start and end year for a desired baseline. It is not used by default.}
+
+\item{type}{character; only used if a baseline is specified. Defaults to "hourly".}
 
 \item{ignore.case}{logical; by default the search for station names is not case-sensitive.}
 
@@ -17,14 +22,15 @@ find_station(name = NULL, ignore.case = TRUE, ...)
 An object of class \code{"hcd_station_list"}, which is a \code{"tbl_df"}, containing details of any matching HCD stations.
 }
 \description{
-Search for stations in the Historical Climate Data inventory by name.
+Search for stations in the Historical Climate Data inventory by name, with the option to filter by available data.
 }
 \examples{
 find_station("Regina")
-
-find_station("Yellowknife")
+find_station("Yellowknife", baseline = c(1971, 2000), type = "hourly")
 }
 \author{
 Gavin L. Simpson
+
+Conor I. Anderson
 }
 
