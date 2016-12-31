@@ -26,7 +26,7 @@ hcd_download(station, file, dir = tempdir(), timescale = c("monthly",
 A character vector containing file paths to the downloaded CSVs is returned invisibly.
 }
 \description{
-Form URLs to requested Canadian Historical Climate Data records.
+Downloads raw CSV data files from the Canadian Historical Climate Data website. These are the raw files you would obtain if you accessed a data record through the HCD website.
 }
 \examples{
 f <- hcd_download(1707, timescale = "monthly")

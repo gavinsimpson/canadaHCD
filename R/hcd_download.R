@@ -1,6 +1,6 @@
 ##' @title Download CSV files of Historical Climate Data records
 ##'
-##' @description Form URLs to requested Canadian Historical Climate Data records.
+##' @description Downloads raw CSV data files from the Canadian Historical Climate Data website. These are the raw files you would obtain if you accessed a data record through the HCD website.
 ##' @param station character; one or more HCD station IDs.
 ##' @param file character; one or more file names. If not supplied, file names of the form \code{station-year-month.csv}, with \code{year} and \code{month} appended as determined by argument \code{timescale}.
 ##' @param dir character; vector of one or more directory paths in which CSV files will be saved.scale of the requested Historical Climate Data records. If multiple paths supplied, there should be one path per station.
