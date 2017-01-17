@@ -23,7 +23,7 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-License: GPL-2
+License: GPL-3
 URL: https://github.com/gavinsimpson/canadaHCD/
 BugReports: https://github.com/gavinsimpson/canadaHCD/issues
 ByteCompile: true
