@@ -4,12 +4,14 @@
 \alias{find_station}
 \title{Find a Historical Climate Data station}
 \usage{
-find_station(name = NULL, ignore.case = TRUE, ...)
+find_station(name = NULL, ignore.case = TRUE, glob = FALSE, ...)
 }
 \arguments{
 \item{name}{character; character string or a regular expression to be matched against known station names. See \code{\link{grep}} for details.}
 
 \item{ignore.case}{logical; by default the search for station names is not case-sensitive.}
+
+\item{glob}{logical; use wildcards (e.g. \code{"yell*"}) in the \code{name}. See \code{link{glob2rx}} for details.}
 
 \item{...}{Additional arguments passed to \code{\link{grep}}.}
 }
@@ -23,6 +25,8 @@ Search for stations in the Historical Climate Data inventory by name.
 find_station("Regina")
 
 find_station("Yellowknife")
+
+find_station("Yell*", glob = TRUE)
 }
 \author{
 Gavin L. Simpson
