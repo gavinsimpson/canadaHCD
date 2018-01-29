@@ -31,4 +31,3 @@ find_station("Yell*", glob = TRUE)
 \author{
 Gavin L. Simpson
 }
-

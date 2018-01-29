@@ -29,4 +29,3 @@ head(urls$url)
 \author{
 Gavin L. Simpson
 }
-

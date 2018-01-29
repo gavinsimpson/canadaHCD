@@ -20,4 +20,3 @@ Given a list of HCD data sets, \code{collapse_hcd} binds together each element o
 \author{
 Gavin L. Simpson
 }
-

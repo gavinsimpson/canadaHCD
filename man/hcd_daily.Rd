@@ -26,4 +26,3 @@ Daily Historical Climate Data for stated station IDs are downloaded from the Gov
 \author{
 Gavin L. Simpson
 }
-

@@ -24,4 +24,3 @@ Monthly Historical Climate Data for stated station IDs are downloaded from the G
 \author{
 Gavin L. Simpson
 }
-

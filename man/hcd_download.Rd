@@ -49,4 +49,3 @@ file.exists(f)
 \author{
 Gavin L. Simpson
 }
-

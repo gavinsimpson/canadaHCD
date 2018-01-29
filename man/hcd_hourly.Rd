@@ -28,4 +28,3 @@ Hourly Historical Climate Data for stated station IDs are downloaded from the Go
 \author{
 Gavin L. Simpson
 }
-

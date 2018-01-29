@@ -33,4 +33,3 @@ Gavin L. Simpson
 
 ## FIXME: if hadley fixes the bug in count_fields, add it back here as import from readr & remove utils import
 }
-
