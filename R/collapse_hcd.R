@@ -9,15 +9,29 @@
 ##' @author Gavin L. Simpson
 ##'
 ##' @importFrom dplyr bind_rows
-##' @importFrom tibble add_column
+##' @importFrom tibble add_column has_name
 `collapse_hcd` <- function(l, station) {
     nr <- vapply(l, NROW, integer(1L))
-    fixym <- inherits(l[[1]]$Date, "yearmon")
-    l <- bind_rows(l)
-    if (fixym) {
-        l$Date <- as.yearmon(l$Date)
+
+    ## do we need to fix-up the yearmon column?
+    fixym <- if (has_name(l, "Date")) {
+        inherits(l[[1]][["Date"]], "yearmon")
+    } else {
+        FALSE
     }
+
+    ## form a data frame from individual objects in `l`
+    l <- bind_rows(l)
+
+    ## fix-up yearmon column if present
+    if (fixym) {
+        l[["Date"]] <- as.yearmon(l[["Date"]])
+    }
+
+    ## add on the station ids
     l <- add_column(l, Station = rep(station, times = nr),
                     .before = 1)
+
+    ## return
     l
 }
