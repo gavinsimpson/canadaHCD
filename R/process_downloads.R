@@ -1,4 +1,5 @@
 ##' @importFrom utils txtProgressBar setTxtProgressBar
+##' @importFrom digest digest
 `process_downloads` <- function(urls, progress = TRUE, cache = FALSE, ...) {
     nurls <- length(urls)
     sdata <- vector(mode = "list", length = nurls)
