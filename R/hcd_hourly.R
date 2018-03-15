@@ -6,6 +6,7 @@
 ##' @param month numeric; vector of one or months
 ##' @param collapse Logical; if \code{TRUE} and multiple \code{station}s are requested a single \code{data frame} is returned, formed by row-binding the data for each station and prepending a station identifier variable.
 ##' @param progress Logical; if \code{TRUE}, a bar is shown indicating progress in downloading station data from the HCD website.
+##' @param cache Logical; if \code{TRUE}, the processed data will be cached in your user cache dir for future use.
 ##' @param ... Further arguments passed to \code{\link{read_hcd}}.
 ##'
 ##' @return A \code{\link{tbl_df}} containing the requested monthly climate data
@@ -13,14 +14,14 @@
 ##' @author Gavin L. Simpson
 ##'
 ##' @export
-`hcd_hourly` <- function(station, year, month, collapse = TRUE, progress = TRUE, ...) {
-    ## Generate URLs
-    urls <- hcd_url(station, timescale = "hourly", year = year, month = month)
+`hcd_hourly` <- function(station, year, month, collapse = TRUE, progress = TRUE, cache = FALSE, ...) {
+    ## Generate keys
+    keys <- hcd_key(station, timescale = "hourly", year = year, month = month)
     ## Download data
-    sdata <- process_downloads(urls$url, progress = progress, ...)
+    sdata <- process_downloads(keys$key, progress = progress, cache = cache, ...)
     ## collapse multiple stations to a single tbl_df
     if (collapse) {
-        sdata <- collapse_hcd(sdata, urls$station)
+        sdata <- collapse_hcd(sdata, keys$station)
     }
 
     sdata
