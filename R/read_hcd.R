@@ -37,9 +37,11 @@
     dailyTypes   <- paste0("Diiic", paste0(rep("dc", 8L), collapse = ""), "iciccc")
     monthlyTypes <- paste0("cii", paste0(rep("dc", 8L), collapse = ""), "iciccc")
     types <- switch(as.character(SKIP),
+                    "15" = hourlyTypes, # data prior to May 2018
+                    "16" = hourlyTypes, # data May 2018 and later
                     "24" = dailyTypes,
-                    "18" = monthlyTypes,
-                    "15" = hourlyTypes)
+                    "25" = dailyTypes,
+                    "18" = monthlyTypes)
     df <- read_csv(file, skip = SKIP, locale = locale(encoding = "ISO-8859-1"),
                    col_types = types, ...)
     df <- as_data_frame(df)
