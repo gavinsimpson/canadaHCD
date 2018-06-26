@@ -14,14 +14,14 @@
     nr <- vapply(l, NROW, integer(1L))
 
     ## do we need to fix-up the yearmon column?
-    fixym <- if (has_name(l, "Date")) {
+    fixym <- if (has_name(l[[1]], "Date")) {
         inherits(l[[1]][["Date"]], "yearmon")
     } else {
         FALSE
     }
 
     ## form a data frame from individual objects in `l`
-    l <- bind_rows(l)
+    l <- suppressWarnings(bind_rows(l))
 
     ## fix-up yearmon column if present
     if (fixym) {

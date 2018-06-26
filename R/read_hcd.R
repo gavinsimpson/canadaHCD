@@ -32,14 +32,16 @@
     ## FIXME: this is what we want if readr::count_fields is fixed:
     ## nfields <- count_fields(file, tokenizer_csv(), n_max = 26L)
     nfields <- count.fields(file, sep = ",", quote = "\"", blank.lines.skip = FALSE)[1:26]
-    SKIP <- which(nfields == max(nfields))[1L] - 1L
-    hourlyTypes  <- "Tiiiccdcdcicicicdcdcicicc"
+    SKIP <- which.max(nfields) - 1L
+    hourlyTypes  <- "Tiiicdcdcicicicdcdcicicc"
     dailyTypes   <- paste0("Diiic", paste0(rep("dc", 8L), collapse = ""), "iciccc")
     monthlyTypes <- paste0("cii", paste0(rep("dc", 8L), collapse = ""), "iciccc")
     types <- switch(as.character(SKIP),
+                    "15" = hourlyTypes, # data prior to May 2018
+                    "16" = hourlyTypes, # data May 2018 and later
+                    "24" = dailyTypes,
                     "25" = dailyTypes,
-                    "18" = monthlyTypes,
-                    "16" = hourlyTypes)
+                    "18" = monthlyTypes)
     df <- read_csv(file, skip = SKIP, locale = locale(encoding = "ISO-8859-1"),
                    col_types = types, ...)
     df <- as_data_frame(df)
@@ -58,8 +60,7 @@
                   "GroundSnowFlag","MaxGustDir","MaxGustDirFlag","MaxGustSpeed",
                   "MaxGustSpeedFlag")
             } else if (inherits(df[[1]], "POSIXt")) { # must be hourly
-                c("DateTime","Data Quality",
-                  "Temp","TempFlag","DewPointTemp","DewPointTempFlag",
+                c("DateTime","Temp","TempFlag","DewPointTemp","DewPointTempFlag",
                   "RelHumidity","RelHumidityFlag","WindDir","WindDirFlag",
                   "WindSpeed","WindSpeedFlag","Visibility","VisibilityFlag",
                   "Pressure","PressureFlag","Humidex","HumidexFlag","WindChill",
