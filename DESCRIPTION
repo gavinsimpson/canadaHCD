@@ -17,7 +17,10 @@ Imports:
     curl,
     dplyr,
     zoo,
-    utils
+    utils,
+    digest,
+    storr,
+    rappdirs
 Suggests:
     testthat,
     knitr,
