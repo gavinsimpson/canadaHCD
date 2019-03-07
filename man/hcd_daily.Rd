@@ -4,8 +4,8 @@
 \alias{hcd_daily}
 \title{Download daily Historical Climate Data records}
 \usage{
-hcd_daily(station, year, collapse = TRUE, progress = TRUE, cache = FALSE,
-  ...)
+hcd_daily(station, year, collapse = TRUE, progress = TRUE,
+  cache = FALSE, ...)
 }
 \arguments{
 \item{station}{Character or numeric; one or more HCD station IDs.}

@@ -12,12 +12,14 @@ Description: Access climate data from Government of Canada's Historical Climate
 Depends:
     R (>= 2.10)
 Imports:
-    readr,
-    tibble,
     curl,
     dplyr,
-    zoo,
-    utils
+    rappdirs,
+    readr,
+    storr,
+    tibble,
+    utils,
+    zoo
 Suggests:
     testthat,
     knitr,

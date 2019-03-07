@@ -10,5 +10,6 @@ fetch_hook_hcd <- function(key, namespace) {
   res <- capture_warnings(read_hcd(path))
   df <- res$value
   attr(df, "warnings") <- res$warnings
+  attr(df, "download_date") <- Sys.Date()
   df
 }

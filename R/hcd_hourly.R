@@ -18,7 +18,7 @@
     ## Generate keys
     keys <- hcd_key(station, timescale = "hourly", year = year, month = month)
     ## Download data
-    sdata <- process_downloads(keys$key, progress = progress, cache = cache, ...)
+    sdata <- process_downloads(keys, progress = progress, cache = cache, ...)
     ## collapse multiple stations to a single tbl_df
     if (collapse) {
         sdata <- collapse_hcd(sdata, keys$station)
