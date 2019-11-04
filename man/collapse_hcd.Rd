@@ -4,12 +4,10 @@
 \alias{collapse_hcd}
 \title{Bind a list of HCD data sets, row-wise.}
 \usage{
-collapse_hcd(l, station)
+collapse_hcd(l)
 }
 \arguments{
 \item{l}{a list whose elements are tibbles that should be bound, row-wise.}
-
-\item{station}{Character or numeric; one station ID per element of \code{l}.}
 }
 \value{
 A \code{\link{tbl_df}} of the data after row binding each element of input.
