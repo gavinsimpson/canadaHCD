@@ -20,7 +20,7 @@
     sdata <- process_downloads(urls$url, progress = progress, ...)
     ## collapse multiple stations to a single tbl_df
     if (collapse) {
-        sdata <- collapse_hcd(sdata, urls$station)
+        sdata <- collapse_hcd(sdata)
     }
 
     sdata

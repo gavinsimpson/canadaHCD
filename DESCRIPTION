@@ -1,8 +1,8 @@
 Package: canadaHCD
 Type: Package
 Title: Canadian Historical Climate Data
-Version: 0.0-1
-Date: 2016-05-26
+Version: 0.0-2
+Date: 2019-11-04
 Authors@R: c(person(given = c("Gavin", "L."), family = "Simpson",
     role = c("aut","cre"), email = "ucfagls@gmail.com"),
     person(given = "Conor", family = "Anderson", role = "ctb"))

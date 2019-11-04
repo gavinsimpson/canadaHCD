@@ -17,7 +17,7 @@
 ##' @importFrom tibble as_data_frame
 ##' @importFrom zoo as.yearmon
 ##' @importFrom utils count.fields
-##' @importFrom dplyr mutate
+##' @importFrom dplyr mutate .data
 ##'
 ##' @export
 ##'
@@ -28,45 +28,40 @@
 ##' ## read a daily data file
 ##' read_hcd(system.file("extdata/2855-daily-data-2015.csv", package = "canadaHCD"))
 `read_hcd` <- function(file, flags = FALSE, clean = TRUE, ...) {
-    Date <- NULL                        # to kill the global variable NOTE!
-    ## FIXME: this is what we want if readr::count_fields is fixed:
-    ## nfields <- count_fields(file, tokenizer_csv(), n_max = 26L)
-    nfields <- count.fields(file, sep = ",", quote = "\"", blank.lines.skip = FALSE)[1:26]
+    nfields <- count.fields(textConnection(readLines(file, n = 1L)), sep = ",", quote = "\"")
     SKIP <- which.max(nfields) - 1L
-    hourlyTypes  <- "Tiiicdcdcicicicdcdcicicc"
-    dailyTypes   <- paste0("Diiic", paste0(rep("dc", 8L), collapse = ""), "iciccc")
-    monthlyTypes <- paste0("cii", paste0(rep("dc", 8L), collapse = ""), "iciccc")
-    types <- switch(as.character(SKIP),
-                    "15" = hourlyTypes, # data prior to May 2018
-                    "16" = hourlyTypes, # data May 2018 and later
-                    "24" = dailyTypes,
-                    "25" = dailyTypes,
-                    "18" = monthlyTypes)
-    df <- read_csv(file, skip = SKIP, locale = locale(encoding = "ISO-8859-1"),
-                   col_types = types, ...)
-    df <- as_data_frame(df)
+    hourlyTypes  <- "ddccTiiicdcdcicicicdcdcicicc"
+    dailyTypes   <- paste0("ddccDiiic", paste0(rep("dc", 8L), collapse = ""), "iciccc")
+    monthlyTypes <- paste0("ddcccii", paste0(rep("dc", 8L), collapse = ""), "iciccc")
+    types <- switch(as.character(nfields),
+                    "28" = hourlyTypes, # data May 2018 and later
+                    "31" = dailyTypes,
+                    "29" = monthlyTypes)
+    df <- read_csv(file, col_types = types, ...)
     ## drop Year Month Day Time columns if exist
     df <- df[, !names(df) %in% c("Year", "Month", "Day", "Time")]
 
     ## clean variables names
     if (isTRUE(clean)) {
         names(df) <-
-            if (inherits(df[[1]], "Date")) { # must be daily
-                c("Date","Data Quality",
+            if (inherits(df[[5]], "Date")) { # must be daily
+                c("Longitude","Latitude","Station","StationID","Date","Data Quality",
                   "MaxTemp","MaxTempFlag","MinTemp","MinTempFlag","MeanTemp",
                   "MeanTempFlag","HeatDegDays","HeatDegDaysFlag","CoolDegDays",
                   "CoolDegDaysFlag","TotalRain","TotalRainFlag","TotalSnow",
                   "TotalSnowFlag","TotalPrecip","TotalPrecipFlag","GroundSnow",
                   "GroundSnowFlag","MaxGustDir","MaxGustDirFlag","MaxGustSpeed",
                   "MaxGustSpeedFlag")
-            } else if (inherits(df[[1]], "POSIXt")) { # must be hourly
-                c("DateTime","Temp","TempFlag","DewPointTemp","DewPointTempFlag",
+            } else if (inherits(df[[5]], "POSIXt")) { # must be hourly
+                c("Longitude","Latitude","Station","StationID","DateTime",
+                  "Temp","TempFlag","DewPointTemp","DewPointTempFlag",
                   "RelHumidity","RelHumidityFlag","WindDir","WindDirFlag",
                   "WindSpeed","WindSpeedFlag","Visibility","VisibilityFlag",
                   "Pressure","PressureFlag","Humidex","HumidexFlag","WindChill",
                   "WindChillFlag","Weather")
             } else {                    # must be monthly
-                c("Date","MaxTemp","MaxTempFlag","MinTemp","MinTempFlag",
+                c("Longitude","Latitude","Station","StationID","Date",
+                  "MaxTemp","MaxTempFlag","MinTemp","MinTempFlag",
                   "MeanTemp","MeanTempFlag","ExtremeHigh","ExtremeHighFlag","ExtremeLow",
                   "ExtremeLowFlag","TotalRain","TotalRainFlag","TotalSnow",
                   "TotalSnowFlag","TotalPrecip","TotalPrecipFlag","LastSnowGrnd",
@@ -82,10 +77,13 @@
         df <- df[, !grepl("Data Quality", names(df))]
     }
 
-    if (!(inherits(df[[1]], "Date") || inherits(df[[1]], "POSIXt"))) {
+    if (!(inherits(df$Date, "Date") || inherits(df$Date, "POSIXt"))) {
         ## coerce Date/Time to Zoo yearmon object
-        df <- mutate(df, Date = as.yearmon(Date, format = "%Y-%m"))
+        df <- mutate(df, Date = as.yearmon(.data$Date, format = "%Y-%m"))
     }
+
+    ## reorder columns
+    df <- select(df, matches("Station"), matches("StationID"), everything())
 
     ## return
     df
