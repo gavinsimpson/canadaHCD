@@ -28,25 +28,25 @@ Say I'm interested in climate data for stations in Yellowknife, I can search for
 ```r
 library("canadaHCD")
 find_station("Yellowknife")
-#> # A tibble: 7 × 5
-#>                    Name              Province StationID LatitudeDD
-#>                  <fctr>                <fctr>    <fctr>      <dbl>
-#> 1         YELLOWKNIFE A Northwest Territories      1706      62.46
-#> 2         YELLOWKNIFE A Northwest Territories     51058      62.46
-#> 3   YELLOWKNIFE OVERLAP Northwest Territories     53898      62.46
-#> 4 YELLOWKNIFE-HENDERSON Northwest Territories     45467      62.45
-#> 5  YELLOWKNIFE CON MINE Northwest Territories      8949      62.47
-#> 6        YELLOWKNIFE CS Northwest Territories     27338      62.47
-#> 7     YELLOWKNIFE HYDRO Northwest Territories      1707      62.67
+#> # A tibble: 7 x 5
+#>   Name                  Province              StationID LatitudeDD
+#>   <fct>                 <fct>                 <fct>          <dbl>
+#> 1 YELLOWKNIFE A         Northwest Territories 1706            62.5
+#> 2 YELLOWKNIFE A         Northwest Territories 51058           62.5
+#> 3 YELLOWKNIFE OVERLAP   Northwest Territories 53898           62.5
+#> 4 YELLOWKNIFE-HENDERSON Northwest Territories 45467           62.4
+#> 5 YELLOWKNIFE CON MINE  Northwest Territories 8949            62.5
+#> 6 YELLOWKNIFE CS        Northwest Territories 27338           62.5
+#> 7 YELLOWKNIFE HYDRO     Northwest Territories 1707            62.7
 #>   LongitudeDD
 #>         <dbl>
-#> 1     -114.44
-#> 2     -114.44
-#> 3     -114.44
-#> 4     -114.38
-#> 5     -114.33
-#> 6     -114.45
-#> 7     -114.25
+#> 1       -114.
+#> 2       -114.
+#> 3       -114.
+#> 4       -114.
+#> 5       -114.
+#> 6       -114.
+#> 7       -114.
 ```
 
 To download the monthly HCD from `YELLOWKNIFE HYDRO` I can use `hcd_monthly()`, providing it with the `StationID` for that particular weather station
@@ -61,32 +61,32 @@ The data are returned as a [*tibble*](https://cran.r-project.org/web/packages/ti
 
 ```r
 yh
-#> # A tibble: 690 × 13
-#>    Station          Date MaxTemp MinTemp MeanTemp ExtremeHigh ExtremeLow
-#>      <dbl> <S3: yearmon>   <dbl>   <dbl>    <dbl>       <dbl>      <dbl>
-#> 1     1707      Jan 1943      NA      NA       NA          NA         NA
-#> 2     1707      Feb 1943   -16.2   -26.4    -21.3         1.1      -44.4
-#> 3     1707      Mar 1943   -14.4   -29.4    -21.9        -3.3      -40.6
-#> 4     1707      Apr 1943     1.2   -12.3     -5.6        12.2      -31.7
-#> 5     1707      May 1943     9.3    -3.6      2.9        20.0      -11.7
-#> 6     1707      Jun 1943    17.6     2.4     10.0        27.2       -1.7
-#> 7     1707      Jul 1943    20.6     9.6     15.1        27.2        4.4
-#> 8     1707      Aug 1943    18.9     7.2     13.1        27.2        1.7
-#> 9     1707      Sep 1943    10.9     2.0      6.5        18.3       -6.1
-#> 10    1707      Oct 1943     6.1    -1.9      2.1        17.2      -15.6
-#>    TotalRain TotalSnow TotalPrecip LastSnowGrnd
-#>        <dbl>     <dbl>       <dbl>        <int>
-#> 1         NA        NA          NA           NA
-#> 2        0.0       9.4         9.4           NA
-#> 3        0.0       2.8         2.8           NA
-#> 4        0.0      18.0        18.0           NA
-#> 5        9.9       2.8        12.7           NA
-#> 6        4.8       0.0         4.8           NA
-#> 7       36.6       0.0        36.6           NA
-#> 8       17.8       0.0        17.8           NA
-#> 9        5.8       2.8         8.6           NA
-#> 10      19.1       5.1        24.1           NA
-#> # ... with 680 more rows, and 2 more variables: MaxGustDir <int>,
+#> # A tibble: 690 x 16
+#>    Station StationID Longitude Latitude Date  MaxTemp MinTemp MeanTemp
+#>    <chr>   <chr>         <dbl>    <dbl> <yea>   <dbl>   <dbl>    <dbl>
+#>  1 YELLOW… 2204200       -114.     62.7 Jan …    NA      NA       NA  
+#>  2 YELLOW… 2204200       -114.     62.7 Feb …   -16.2   -26.4    -21.3
+#>  3 YELLOW… 2204200       -114.     62.7 Mar …   -14.4   -29.4    -21.9
+#>  4 YELLOW… 2204200       -114.     62.7 Apr …     1.2   -12.3     -5.6
+#>  5 YELLOW… 2204200       -114.     62.7 May …     9.3    -3.6      2.9
+#>  6 YELLOW… 2204200       -114.     62.7 Jun …    17.6     2.4     10  
+#>  7 YELLOW… 2204200       -114.     62.7 Jul …    20.6     9.6     15.1
+#>  8 YELLOW… 2204200       -114.     62.7 Aug …    18.9     7.2     13.1
+#>  9 YELLOW… 2204200       -114.     62.7 Sep …    10.9     2        6.5
+#> 10 YELLOW… 2204200       -114.     62.7 Oct …     6.1    -1.9      2.1
+#>    ExtremeHigh ExtremeLow TotalRain TotalSnow TotalPrecip LastSnowGrnd
+#>          <dbl>      <dbl>     <dbl>     <dbl>       <dbl>        <int>
+#>  1        NA         NA        NA        NA          NA             NA
+#>  2         1.1      -44.4       0         9.4         9.4           NA
+#>  3        -3.3      -40.6       0         2.8         2.8           NA
+#>  4        12.2      -31.7       0        18          18             NA
+#>  5        20        -11.7       9.9       2.8        12.7           NA
+#>  6        27.2       -1.7       4.8       0           4.8           NA
+#>  7        27.2        4.4      36.6       0          36.6           NA
+#>  8        27.2        1.7      17.8       0          17.8           NA
+#>  9        18.3       -6.1       5.8       2.8         8.6           NA
+#> 10        17.2      -15.6      19.1       5.1        24.1           NA
+#> # … with 680 more rows, and 2 more variables: MaxGustDir <int>,
 #> #   MaxGustSpeed <chr>
 ```
 
@@ -97,35 +97,34 @@ Allthough not yet exposed through any functions in the package, you can access a
 
 ```r
 canadaHCD:::station_data
-#> # A tibble: 12,565 × 19
-#>                      Name         Province ClimateID StationID  WMOID
-#>                    <fctr>           <fctr>    <fctr>    <fctr> <fctr>
-#> 1             ACTIVE PASS British Columbia   1010066        14     NA
-#> 2             ALBERT HEAD British Columbia   1010235        15     NA
-#> 3  BAMBERTON OCEAN CEMENT British Columbia   1010595        16     NA
-#> 4              BEAR CREEK British Columbia   1010720        17     NA
-#> 5             BEAVER LAKE British Columbia   1010774        18     NA
-#> 6              BECHER BAY British Columbia   1010780        19     NA
-#> 7         BRENTWOOD BAY 2 British Columbia   1010960        20     NA
-#> 8   BRENTWOOD CLARKE ROAD British Columbia   1010961        21     NA
-#> 9  BRENTWOOD W SAANICH RD British Columbia   1010965        22     NA
-#> 10             BEAR CREEK British Columbia   1010PJR      9634     NA
-#>      TCID LatitudeDD LongitudeDD  Latitude
-#>    <fctr>      <dbl>       <dbl>     <int>
-#> 1      NA      48.87     -123.28 485200000
-#> 2      NA      48.40     -123.48 482400000
-#> 3      NA      48.58     -123.52 483500000
-#> 4      NA      48.50     -124.00 483000000
-#> 5      NA      48.50     -123.35 483000000
-#> 6      NA      48.33     -123.63 482000000
-#> 7      NA      48.60     -123.47 483600000
-#> 8      NA      48.57     -123.45 483400000
-#> 9      NA      48.57     -123.43 483400000
-#> 10     NA      48.50     -123.90 483000000
-#> # ... with 12,555 more rows, and 10 more variables: Longitude <int>,
-#> #   Elevation <dbl>, FirstYear <int>, LastYear <int>, HourlyFirstYr <int>,
-#> #   HourlyLastYr <int>, DailyFirstYr <int>, DailyLastYr <int>,
-#> #   MonthlyFirstYr <int>, MonthlyLastYr <int>
+#> # A tibble: 12,565 x 19
+#>    Name  Province ClimateID StationID WMOID TCID  LatitudeDD LongitudeDD
+#>    <fct> <fct>    <fct>     <fct>     <fct> <fct>      <dbl>       <dbl>
+#>  1 ACTI… British… 1010066   14        <NA>  <NA>        48.9       -123.
+#>  2 ALBE… British… 1010235   15        <NA>  <NA>        48.4       -123.
+#>  3 BAMB… British… 1010595   16        <NA>  <NA>        48.6       -124.
+#>  4 BEAR… British… 1010720   17        <NA>  <NA>        48.5       -124 
+#>  5 BEAV… British… 1010774   18        <NA>  <NA>        48.5       -123.
+#>  6 BECH… British… 1010780   19        <NA>  <NA>        48.3       -124.
+#>  7 BREN… British… 1010960   20        <NA>  <NA>        48.6       -123.
+#>  8 BREN… British… 1010961   21        <NA>  <NA>        48.6       -123.
+#>  9 BREN… British… 1010965   22        <NA>  <NA>        48.6       -123.
+#> 10 BEAR… British… 1010PJR   9634      <NA>  <NA>        48.5       -124.
+#>    Latitude Longitude Elevation FirstYear LastYear HourlyFirstYr
+#>       <int>     <int>     <dbl>     <int>    <int>         <int>
+#>  1   4.85e8   -1.23e9       4        1984     1996            NA
+#>  2   4.82e8   -1.23e9      17        1971     1995            NA
+#>  3   4.84e8   -1.23e9      85.3      1961     1980            NA
+#>  4   4.83e8   -1.24e9     350.       1910     1971            NA
+#>  5   4.83e8   -1.23e9      61        1894     1952            NA
+#>  6   4.82e8   -1.23e9      12.2      1956     1966            NA
+#>  7   4.84e8   -1.23e9      38        1987     1997            NA
+#>  8   4.83e8   -1.23e9      30.5      1972     1980            NA
+#>  9   4.83e8   -1.23e9      91.4      1960     1970            NA
+#> 10   4.83e8   -1.24e9     419          NA       NA            NA
+#> # … with 12,555 more rows, and 5 more variables: HourlyLastYr <int>,
+#> #   DailyFirstYr <int>, DailyLastYr <int>, MonthlyFirstYr <int>,
+#> #   MonthlyLastYr <int>
 ```
 
 If we wanted to know which resolutions of data were available for the `YELLOWKNIFE HYDRO` station, we can extract certain columns from the station data object
@@ -136,7 +135,7 @@ id <- grep("YELLOWKNIFE HYDRO", canadaHCD:::station_data$Name)
 vars <- c("HourlyFirstYr", "HourlyLastYr", "DailyFirstYr", "DailyLastYr", "MonthlyFirstYr", 
     "MonthlyLastYr")
 canadaHCD:::station_data[id, vars]
-#> # A tibble: 1 × 6
+#> # A tibble: 1 x 6
 #>   HourlyFirstYr HourlyLastYr DailyFirstYr DailyLastYr MonthlyFirstYr
 #>           <int>        <int>        <int>       <int>          <int>
 #> 1            NA           NA         1943        2000           1943
