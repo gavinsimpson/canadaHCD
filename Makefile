@@ -12,6 +12,8 @@ build: docs
 
 check: build
 	cd ..;\
+	export NOT_CRAN="true"; \
+	echo "$${NOT_CRAN}"; \
 	R CMD check canadaHCD_$(PKGVERS).tar.gz
 
 check-cran: build
