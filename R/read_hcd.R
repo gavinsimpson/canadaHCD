@@ -77,7 +77,8 @@
         df <- df[, !grepl("Data Quality", names(df))]
     }
 
-    if (!(inherits(df$Date, "Date") || inherits(df$Date, "POSIXt"))) {
+    ## need df[[5]] as some data types are DateTime, etc
+    if (!(inherits(df[[5]], "Date") || inherits(df[[5]], "POSIXt"))) {
         ## coerce Date/Time to Zoo yearmon object
         df <- mutate(df, Date = as.yearmon(.data$Date, format = "%Y-%m"))
     }
