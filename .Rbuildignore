@@ -1,0 +1,9 @@
+LICENSE
+^\.travis\.yml$
+\.Rproj$
+^\.Rproj\.user$
+Makefile
+appveyor.yml
+.gitattributes
+.gitignore
+README.Rmd

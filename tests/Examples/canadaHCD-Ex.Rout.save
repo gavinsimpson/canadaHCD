@@ -1,0 +1,208 @@
+
+R version 3.6.1 Patched (2019-07-17 r76848) -- "Action of the Toes"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "canadaHCD"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('canadaHCD')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("find_station")
+> ### * find_station
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: find_station
+> ### Title: Find a Historical Climate Data station
+> ### Aliases: find_station
+> 
+> ### ** Examples
+> 
+> find_station("Regina")
+# A tibble: 30 x 5
+   Name                       Province     StationID LatitudeDD LongitudeDD
+   <fct>                      <fct>        <fct>          <dbl>       <dbl>
+ 1 REGINA                     Saskatchewan 7450            NA           NA 
+ 2 REGINA                     Saskatchewan 7451            50.4       -105.
+ 3 REGINA INT'L A             Saskatchewan 3002            50.4       -105.
+ 4 REGINA                     Saskatchewan 50877           50.4       -105.
+ 5 REGINA CO-OP UPGRADER SNOW Saskatchewan 46587           50.5       -105.
+ 6 REGINA SIAST SNOW          Saskatchewan 46588           50.4       -105.
+ 7 REGINA RCMP SNOW           Saskatchewan 46607           50.4       -105.
+ 8 REGINA INTL A              Saskatchewan 51441           50.4       -105.
+ 9 REGINA AP STN A            Saskatchewan 7452            50.4       -105.
+10 REGINA AP STN B            Saskatchewan 7453            50.4       -105.
+# … with 20 more rows
+> 
+> find_station("Yellowknife")
+# A tibble: 7 x 5
+  Name                  Province              StationID LatitudeDD LongitudeDD
+  <fct>                 <fct>                 <fct>          <dbl>       <dbl>
+1 YELLOWKNIFE A         Northwest Territories 1706            62.5       -114.
+2 YELLOWKNIFE A         Northwest Territories 51058           62.5       -114.
+3 YELLOWKNIFE OVERLAP   Northwest Territories 53898           62.5       -114.
+4 YELLOWKNIFE-HENDERSON Northwest Territories 45467           62.4       -114.
+5 YELLOWKNIFE CON MINE  Northwest Territories 8949            62.5       -114.
+6 YELLOWKNIFE CS        Northwest Territories 27338           62.5       -114.
+7 YELLOWKNIFE HYDRO     Northwest Territories 1707            62.7       -114.
+> 
+> find_station("Yell*", glob = TRUE)
+# A tibble: 9 x 5
+  Name                  Province              StationID LatitudeDD LongitudeDD
+  <fct>                 <fct>                 <fct>          <dbl>       <dbl>
+1 YELLOWKNIFE A         Northwest Territories 1706            62.5       -114.
+2 YELLOWKNIFE A         Northwest Territories 51058           62.5       -114.
+3 YELLOWKNIFE OVERLAP   Northwest Territories 53898           62.5       -114.
+4 YELLOWKNIFE-HENDERSON Northwest Territories 45467           62.4       -114.
+5 YELLOWKNIFE CON MINE  Northwest Territories 8949            62.5       -114.
+6 YELLOWKNIFE CS        Northwest Territories 27338           62.5       -114.
+7 YELLOWKNIFE HYDRO     Northwest Territories 1707            62.7       -114.
+8 YELLOWHEAD LO         Alberta               2641            53.2       -117.
+9 YELLOW GRASS          Saskatchewan          3060            49.8       -104.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("hcd_download")
+> ### * hcd_download
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: hcd_download
+> ### Title: Download CSV files of Historical Climate Data records
+> ### Aliases: hcd_download
+> 
+> ### ** Examples
+> 
+> f <- hcd_download(1707, timescale = "monthly")
+  |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%
+> file.exists(f)
+[1] TRUE
+> 
+> ## specifying multiple storage folders
+> dirs <- file.path(tempdir(), c("2855", "1707"))
+> dir.create(dirs[1])
+> dir.create(dirs[2])
+> f <- hcd_download(c(2855, 1707), timescale = "monthly", dir = dirs)
+  |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%
+> file.exists(f)
+[1] TRUE TRUE
+> ## ...and daily
+> f <- hcd_download(c(2855, 1707), timescale = "daily", dir = dirs,
++                   year = 1999:2000)
+  |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%
+> file.exists(f)
+[1] TRUE TRUE TRUE TRUE
+> 
+> 
+> 
+> cleanEx()
+> nameEx("hcd_url")
+> ### * hcd_url
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: hcd_url
+> ### Title: Generate URLs to Historical Climate Data records
+> ### Aliases: hcd_url
+> 
+> ### ** Examples
+> 
+> urls <- hcd_url(c(2855, 1707), timescale = "monthly")
+> urls
+# A tibble: 2 x 2
+  station url                                                                   
+    <int> <chr>                                                                 
+1    2855 http://climate.weather.gc.ca/climate_data/bulk_data_e.html?stationID=…
+2    1707 http://climate.weather.gc.ca/climate_data/bulk_data_e.html?stationID=…
+> head(urls$url)
+[1] "http://climate.weather.gc.ca/climate_data/bulk_data_e.html?stationID=2855&Year=2000&Month=1&Day=14&format=csv&timeframe=3&submit=%20Download+Data"
+[2] "http://climate.weather.gc.ca/climate_data/bulk_data_e.html?stationID=1707&Year=2000&Month=1&Day=14&format=csv&timeframe=3&submit=%20Download+Data"
+> 
+> 
+> 
+> cleanEx()
+> nameEx("read_hcd")
+> ### * read_hcd
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: read_hcd
+> ### Title: Read Historical Climate Data files
+> ### Aliases: read_hcd
+> 
+> ### ** Examples
+> 
+> ## read a monthly data file
+> read_hcd(system.file("extdata/2855-monthly-data.csv", package = "canadaHCD"))
+# A tibble: 515 x 16
+   Station StationID Longitude Latitude Date  MaxTemp MinTemp MeanTemp
+   <chr>   <chr>         <dbl>    <dbl> <yea>   <dbl>   <dbl>    <dbl>
+ 1 BROADV… 4010879       -103.     50.4 Jan …    NA      NA       NA  
+ 2 BROADV… 4010879       -103.     50.4 Feb …    NA      NA       NA  
+ 3 BROADV… 4010879       -103.     50.4 Mar …    -8.1   -20.4    -14.3
+ 4 BROADV… 4010879       -103.     50.4 Apr …     7.3    -1.9      2.7
+ 5 BROADV… 4010879       -103.     50.4 May …    16       1.9      9  
+ 6 BROADV… 4010879       -103.     50.4 Jun …    21.7     9.4     15.6
+ 7 BROADV… 4010879       -103.     50.4 Jul …    24.7    10.4     17.6
+ 8 BROADV… 4010879       -103.     50.4 Aug …    24.6     9.1     16.9
+ 9 BROADV… 4010879       -103.     50.4 Sep …    10.4     0.1      5.3
+10 BROADV… 4010879       -103.     50.4 Oct …    14.1    -0.6      6.8
+# … with 505 more rows, and 8 more variables: ExtremeHigh <dbl>,
+#   ExtremeLow <dbl>, TotalRain <dbl>, TotalSnow <dbl>, TotalPrecip <dbl>,
+#   LastSnowGrnd <int>, MaxGustDir <int>, MaxGustSpeed <chr>
+> 
+> ## read a daily data file
+> read_hcd(system.file("extdata/2855-daily-data-2015.csv", package = "canadaHCD"))
+# A tibble: 365 x 16
+   Station StationID Longitude Latitude Date       MaxTemp MinTemp MeanTemp
+   <chr>   <chr>         <dbl>    <dbl> <date>       <dbl>   <dbl>    <dbl>
+ 1 BROADV… 4010879       -103.     50.4 2015-01-01    -4.9   -12.7     -8.8
+ 2 BROADV… 4010879       -103.     50.4 2015-01-02    -3.9   -19.6    -11.8
+ 3 BROADV… 4010879       -103.     50.4 2015-01-03   -19.5   -29.9    -24.7
+ 4 BROADV… 4010879       -103.     50.4 2015-01-04   -26.9   -34.9    -30.9
+ 5 BROADV… 4010879       -103.     50.4 2015-01-05   -19.3   -31.3    -25.3
+ 6 BROADV… 4010879       -103.     50.4 2015-01-06   -20.7   -25.4    -23.1
+ 7 BROADV… 4010879       -103.     50.4 2015-01-07   -13     -29.4    -21.2
+ 8 BROADV… 4010879       -103.     50.4 2015-01-08   -13.2   -21.7    -17.5
+ 9 BROADV… 4010879       -103.     50.4 2015-01-09   -18.9   -24.1    -21.5
+10 BROADV… 4010879       -103.     50.4 2015-01-10   -20.9   -27.5    -24.2
+# … with 355 more rows, and 8 more variables: HeatDegDays <dbl>,
+#   CoolDegDays <dbl>, TotalRain <dbl>, TotalSnow <dbl>, TotalPrecip <dbl>,
+#   GroundSnow <int>, MaxGustDir <int>, MaxGustSpeed <chr>
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  2.637 0.12 4.277 0.003 0.002 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
