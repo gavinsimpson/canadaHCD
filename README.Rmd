@@ -3,41 +3,56 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", cache = FALSE)
 options(tibble.width = 120)
 ```
 # canadaHCD
-Access Canadian Historical Climate Data from R. The Government of Canada's Historical Climate Data [website](http://climate.weather.gc.ca/index_e.html) provides access to hourly, daily, and monthly weather records for stations throughout Canada.
 
-These are raw data that have undergone some quality control, but issues such as changes in station location are unmanged; the data for the original `stationID` stops at a certain point and a new `stationID` continues recording. For a more curated data set for climate change research at broad spatial and temporal scales see the [Adjusted and Homogenized Canadian Climate Data (AHCCD)](http://ec.gc.ca/dccha-ahccd/default.asp?lang=En&n=B1F8423A-1).
+<!-- badges: start -->
+[![R build status](https://github.com/gavinsimpson/canadaHCD/workflows/R-CMD-check/badge.svg)](https://github.com/gavinsimpson/canadaHCD/actions)
+[![codecov](https://codecov.io/gh/gavinsimpson/canadaHCD/branch/main/graph/badge.svg?token=vDjUqs13Fb)](https://app.codecov.io/gh/gavinsimpson/canadaHCD)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/canadaHCD)](https://cran.r-project.org/package=gratia)
+[![CRAN Downloads](https://cranlogs.r-pkg.org/badges/grand-total/gratia)](https://cran.r-project.org/package=gratia)
+<!-- badges: end -->
 
-#### Released version
-[![CRAN version](http://www.r-pkg.org/badges/version/canadaHCD)](https://cran.r-project.org/package=canadaHCD) [![](http://cranlogs.r-pkg.org/badges/grand-total/canadaHCD)](https://cran.r-project.org/package=canadaHCD)
+Access Canadian Historical Climate Data from R. The Government of Canada's
+Historical Climate Data [website](http://climate.weather.gc.ca/index_e.html)
+provides access to hourly, daily, and monthly weather records for stations
+throughout Canada.
 
-#### Build status
-[![Build Status](https://travis-ci.org/gavinsimpson/canadaHCD.svg?branch=master)](https://travis-ci.org/gavinsimpson/canadaHCD)  [![Build status](https://ci.appveyor.com/api/projects/status/e3ptg9drviavci71/branch/master?svg=true)](https://ci.appveyor.com/project/gavinsimpson/canadahcd/branch/master)  [![codecov.io](https://codecov.io/github/gavinsimpson/canadaHCD/coverage.svg?branch=master)](https://codecov.io/github/gavinsimpson/canadaHCD?branch=master)
+These are raw data that have undergone some quality control, but issues such
+as changes in station location are unmanged; the data for the original
+`stationID` stops at a certain point and a new `stationID` continues recording.
+For a more curated data set for climate change research at broad spatial and
+temporal scales see the [Adjusted and Homogenized Canadian Climate Data (AHCCD)](http://ec.gc.ca/dccha-ahccd/default.asp?lang=En&n=B1F8423A-1).
 
 ## Installation
 
-*canadaHCD* is still under active development towards a 0.1 release. In the meantime, if you wish to use the package, please install it from this github repo, which is most easily achieved using Hadley Wickham's *devtools* package:
+*canadaHCD* is still under active development towards a 0.1 release. In the
+meantime, if you wish to use the package, please install it from this github
+repo, which is most easily achieved using Hadley Wickham's *remotes* package:
 
 ```{r, eval = FALSE}
 ## install.packages("devtools")
-devtools::install_github("gavinsimpson/canadaHCD")
+remotes::install_github("gavinsimpson/canadaHCD")
 ```
 
 ## Usage
 
-Say I'm interested in climate data for stations in Yellowknife, I can search for all known `stationID`s with `"Yellowknife"` in their name using `find_station()`
+Say I'm interested in climate data for stations in Yellowknife, I can search
+for all known `stationID`s with `"Yellowknife"` in their name using
+`find_station()`
 
 ```{r find-station}
 library("canadaHCD")
 find_station("Yellowknife")
 ```
 
-To download the monthly HCD from `YELLOWKNIFE HYDRO` I can use `hcd_monthly()`, providing it with the `StationID` for that particular weather station
+To download the monthly HCD from `YELLOWKNIFE HYDRO` I can use `hcd_monthly()`,
+providing it with the `StationID` for that particular weather station
 
 ```{r download-monthly, results = "hide"}
 yh <- hcd_monthly(1707)
 ```
 
-The data are returned as a [*tibble*](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html) (a `tbl_df`), which shows a compact version of the data frame.
+The data are returned as a [*tibble*](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html)
+(a `tbl_df`), which shows a compact version of the data frame.
 
 ```{r show-data}
 yh
@@ -45,18 +60,24 @@ yh
 
 You should be able to work with these objects mostly as if they were data frames.
 
-Allthough not yet exposed through any functions in the package, you can access a snapshot of the station metadata via the `canadaHCD:::station_data` data frame.
+Allthough not yet exposed through any functions in the package, you can
+access a snapshot of the station metadata via the `canadaHCD:::station_data`
+data frame.
 
 ```{r station-data}
 canadaHCD:::station_data
 ```
 
-If we wanted to know which resolutions of data were available for the `YELLOWKNIFE HYDRO` station, we can extract certain columns from the station data object
+If we wanted to know which resolutions of data were available for the
+`YELLOWKNIFE HYDRO` station, we can extract certain columns from the station
+data object
 
 ```{r extract-station_data, tidy = TRUE, tidy.opts=list(blank=FALSE, width.cutoff=80)}
 id <- grep("YELLOWKNIFE HYDRO", canadaHCD:::station_data$Name)
-vars <- c("HourlyFirstYr", "HourlyLastYr", "DailyFirstYr", "DailyLastYr", "MonthlyFirstYr", "MonthlyLastYr")
+vars <- c("HourlyFirstYr", "HourlyLastYr", "DailyFirstYr", "DailyLastYr",
+    "MonthlyFirstYr", "MonthlyLastYr")
 canadaHCD:::station_data[id, vars]
 ```
 
-The output shows that this station has no hourly data, but daily and monthly data sets exist.
+The output shows that this station has no hourly data, but daily and monthly
+data sets exist.
