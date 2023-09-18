@@ -7,11 +7,15 @@
 read_hcd(file, flags = FALSE, clean = TRUE, ...)
 }
 \arguments{
-\item{file}{Either a path to a file, a connection. See argument \code{file} of \code{\link{read_csv}}.}
+\item{file}{Either a path to a file, a connection. See argument \code{file}
+of \code{\link{read_csv}}.}
 
-\item{flags}{Logical; should variable flag columns be preserved. The default results in these columns being dropped from the returned data.}
+\item{flags}{Logical; should variable flag columns be preserved. The default
+results in these columns being dropped from the returned data.}
 
-\item{clean}{Logical; should variable names be cleaned? The default replaces the variable identifiers from the CSV files with more useful names for use in R code.}
+\item{clean}{Logical; should variable names be cleaned? The default replaces
+the variable identifiers from the CSV files with more useful names for use
+in R code.}
 
 \item{...}{Further arguments passed to \code{\link{read_csv}}.}
 }
@@ -19,17 +23,21 @@ read_hcd(file, flags = FALSE, clean = TRUE, ...)
 A \code{\link{tbl_df}}.
 }
 \description{
-Reads data from CSV files download from the Canada Historical Climate Data website. The function knows about hourly, daily, and monthly data formatted files.
+Reads data from CSV files download from the Canada Historical
+  Climate Data website. The function knows about hourly, daily, and monthly
+  data formatted files.
 }
 \examples{
 ## read a monthly data file
 read_hcd(system.file("extdata/2855-monthly-data.csv", package = "canadaHCD"))
 
 ## read a daily data file
-read_hcd(system.file("extdata/2855-daily-data-2015.csv", package = "canadaHCD"))
+read_hcd(system.file("extdata/2855-daily-data-2015.csv",
+  package = "canadaHCD"))
 }
 \author{
 Gavin L. Simpson
 
-## FIXME: if hadley fixes the bug in count_fields, add it back here as import from readr & remove utils import
+## FIXME: if hadley fixes the bug in count_fields, add it back here as
+import from readr & remove utils import
 }

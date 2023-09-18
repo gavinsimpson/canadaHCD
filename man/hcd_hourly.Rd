@@ -13,9 +13,12 @@ hcd_hourly(station, year, month, collapse = TRUE, progress = TRUE, ...)
 
 \item{month}{numeric; vector of one or months}
 
-\item{collapse}{Logical; if \code{TRUE} and multiple \code{station}s are requested a single \code{data frame} is returned, formed by row-binding the data for each station and prepending a station identifier variable.}
+\item{collapse}{Logical; if \code{TRUE} and multiple \code{station}s are
+requested a single \code{data frame} is returned, formed by row-binding
+the data for each station and prepending a station identifier variable.}
 
-\item{progress}{Logical; if \code{TRUE}, a bar is shown indicating progress in downloading station data from the HCD website.}
+\item{progress}{Logical; if \code{TRUE}, a bar is shown indicating progress
+in downloading station data from the HCD website.}
 
 \item{...}{Further arguments passed to \code{\link{read_hcd}}.}
 }
@@ -23,7 +26,8 @@ hcd_hourly(station, year, month, collapse = TRUE, progress = TRUE, ...)
 A \code{\link{tbl_df}} containing the requested monthly climate data
 }
 \description{
-Hourly Historical Climate Data for stated station IDs are downloaded from the Government of Canada's Historical Climate Data website.
+Hourly Historical Climate Data for stated station IDs are
+  downloaded from the Government of Canada's Historical Climate Data website.
 }
 \author{
 Gavin L. Simpson

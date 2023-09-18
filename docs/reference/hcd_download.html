@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">canadaHCD</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0-3</span>
       </span>
     </div>
 
@@ -35,6 +35,9 @@
       <a href="../articles/canadaHCD-intro.html">Canadian Historical Climate Data</a>
     </li>
   </ul></li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/gavinsimpson/canadaHCD/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
@@ -60,8 +63,15 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">hcd_download</span><span class="op">(</span><span class="va">station</span>, <span class="va">file</span>, dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, timescale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"monthly"</span>,</span>
-<span>  <span class="st">"daily"</span>, <span class="st">"hourly"</span><span class="op">)</span>, year <span class="op">=</span> <span class="cn">NULL</span>, month <span class="op">=</span> <span class="cn">NULL</span>, progress <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">hcd_download</span><span class="op">(</span></span>
+<span>  <span class="va">station</span>,</span>
+<span>  <span class="va">file</span>,</span>
+<span>  dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  timescale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"monthly"</span>, <span class="st">"daily"</span>, <span class="st">"hourly"</span><span class="op">)</span>,</span>
+<span>  year <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  month <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  progress <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -128,12 +138,6 @@
 <span class="r-in"><span><span class="co">## ...and daily</span></span></span>
 <span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu">hcd_download</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2855</span>, <span class="fl">1707</span><span class="op">)</span>, timescale <span class="op">=</span> <span class="st">"daily"</span>, dir <span class="op">=</span> <span class="va">dirs</span>,</span></span>
 <span class="r-in"><span>                  year <span class="op">=</span> <span class="fl">1999</span><span class="op">:</span><span class="fl">2000</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>`as_data_frame()` was deprecated in tibble 2.0.0.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Please use `as_tibble()` (with slightly different semantics) to convert to a</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   tibble, or `as.data.frame()` to convert to a data frame.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> The deprecated feature was likely used in the <span style="color: #0000BB;">canadaHCD</span> package.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   Please report the issue at</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   <span style="color: #0000BB; font-style: italic;">&lt;https://github.com/gavinsimpson/canadaHCD/issues&gt;</span>.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.exists</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE TRUE TRUE TRUE</span>
