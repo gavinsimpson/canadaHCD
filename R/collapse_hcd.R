@@ -1,14 +1,14 @@
-##' @title Bind a list of HCD data sets, row-wise.
-##'
-##' @description Given a list of HCD data sets, \code{collapse_hcd} binds together each element of the list (HCD dataset) row-wise into a single tibble.
-##' @param l a list whose elements are tibbles that should be bound, row-wise.
-##'
-##' @return A \code{\link{tbl_df}} of the data after row binding each element of input.
-##'
-##' @author Gavin L. Simpson
-##'
-##' @importFrom dplyr bind_rows select everything matches
-##' @importFrom tibble add_column has_name
+#' @title Bind a list of HCD data sets, row-wise.
+#'
+#' @description Given a list of HCD data sets, \code{collapse_hcd} binds together each element of the list (HCD dataset) row-wise into a single tibble.
+#' @param l a list whose elements are tibbles that should be bound, row-wise.
+#'
+#' @return A \code{\link{tbl_df}} of the data after row binding each element of input.
+#'
+#' @author Gavin L. Simpson
+#'
+#' @importFrom dplyr bind_rows select everything matches
+#' @importFrom tibble add_column has_name
 `collapse_hcd` <- function(l) {
     nr <- vapply(l, NROW, integer(1L))
 

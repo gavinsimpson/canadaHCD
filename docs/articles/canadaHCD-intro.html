@@ -105,23 +105,22 @@ convenience a recent snapshot of this CSV metadata is available via the
 unexported data frame <code>canadaHCD:::station_data</code>. A
 (currently) simple interface to this metadat is provided via
 <code><a href="../reference/find_station.html">find_station()</a></code>.</p>
-<p>Say you’re interested in climate data for stations in Yellowknife, I
-can search for all known <code>stationID</code>s with
+<p>Say you’re interested in climate data for stations in Yellowknife,
+you can search for all known <code>stationID</code>s with
 <code>"Yellowknife"</code> in their name using
 <code><a href="../reference/find_station.html">find_station()</a></code></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/gavinsimpson/canadaHCD/" class="external-link">"canadaHCD"</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/find_station.html">find_station</a></span><span class="op">(</span><span class="st">"Yellowknife"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 5</span></span></span>
-<span><span class="co">#&gt;   Name                  Province              StationID LatitudeDD LongitudeDD</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> YELLOWKNIFE A         Northwest Territories 1706            62.5       -<span style="color: #BB0000;">114.</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> YELLOWKNIFE A         Northwest Territories 51058           62.5       -<span style="color: #BB0000;">114.</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> YELLOWKNIFE OVERLAP   Northwest Territories 53898           62.5       -<span style="color: #BB0000;">114.</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> YELLOWKNIFE-HENDERSON Northwest Territories 45467           62.4       -<span style="color: #BB0000;">114.</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> YELLOWKNIFE CON MINE  Northwest Territories 8949            62.5       -<span style="color: #BB0000;">114.</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> YELLOWKNIFE CS        Northwest Territories 27338           62.5       -<span style="color: #BB0000;">114.</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> YELLOWKNIFE HYDRO     Northwest Territories 1707            62.7       -<span style="color: #BB0000;">114.</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 6</span></span></span>
+<span><span class="co">#&gt;   Name                  Province      ClimateID StationID LatitudeDD LongitudeDD</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> YELLOWKNIFE A         Northwest Te… 2204100   1706            62.5       -<span style="color: #BB0000;">114.</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> YELLOWKNIFE A         Northwest Te… 2204101   51058           62.5       -<span style="color: #BB0000;">114.</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> YELLOWKNIFE AIRPORT   Northwest Te… 2204108   55358           62.5       -<span style="color: #BB0000;">114.</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> YELLOWKNIFE-HENDERSON Northwest Te… 2204110   45467           62.4       -<span style="color: #BB0000;">114.</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> YELLOWKNIFE CS        Northwest Te… 2204155   27338           62.5       -<span style="color: #BB0000;">114.</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> YELLOWKNIFE HYDRO     Northwest Te… 2204200   1707            62.7       -<span style="color: #BB0000;">114.</span></span></span></code></pre></div>
 <p>If we wanted to know which resolutions of data were available for the
 <code>YELLOWKNIFE HYDRO</code> station, we can extract certain columns
 from the <code>canadaHCD:::station_data</code> object</p>
@@ -148,7 +147,7 @@ frame.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">yh</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 690 × 16</span></span></span>
-<span><span class="co">#&gt;    Station           StationID Longitude Latitude Date  MaxTemp MinTemp MeanTemp</span></span>
+<span><span class="co">#&gt;    Station           ClimateID Longitude Latitude Date  MaxTemp MinTemp MeanTemp</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;yea&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> YELLOWKNIFE HYDRO 2204200       -<span style="color: #BB0000;">114.</span>     62.7 Jan …    <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>  </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> YELLOWKNIFE HYDRO 2204200       -<span style="color: #BB0000;">114.</span>     62.7 Feb …   -<span style="color: #BB0000;">16.2</span>   -<span style="color: #BB0000;">26.4</span>    -<span style="color: #BB0000;">21.3</span></span></span>
