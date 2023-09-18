@@ -9,6 +9,7 @@
 #'
 #' @importFrom dplyr bind_rows select everything matches
 #' @importFrom tibble add_column has_name
+#' @importFrom zoo as.yearmon
 `collapse_hcd` <- function(l) {
     nr <- vapply(l, NROW, integer(1L))
 
@@ -27,6 +28,12 @@
         l[["Date"]] <- as.yearmon(l[["Date"]])
     }
 
+    # arrange by DateTime to ensure all in correct order as per #26
+    l <- if (has_name(l, "DateTime")) {
+        l |> arrange(.data$ClimateID, .data$DateTime)
+    } else {
+        l |> arrange(.data$ClimateID, .data$Date)
+    }
     ## return
     l
 }

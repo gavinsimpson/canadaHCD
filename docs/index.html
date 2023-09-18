@@ -81,130 +81,113 @@
 <div class="section level1">
 <div class="page-header"><h1 id="canadahcd">canadaHCD<a class="anchor" aria-label="anchor" href="#canadahcd"></a>
 </h1></div>
+<!-- badges: start -->
+
 <p>Access Canadian Historical Climate Data from R. The Government of Canada’s Historical Climate Data <a href="http://climate.weather.gc.ca/index_e.html" class="external-link">website</a> provides access to hourly, daily, and monthly weather records for stations throughout Canada.</p>
 <p>These are raw data that have undergone some quality control, but issues such as changes in station location are unmanged; the data for the original <code>stationID</code> stops at a certain point and a new <code>stationID</code> continues recording. For a more curated data set for climate change research at broad spatial and temporal scales see the <a href="http://ec.gc.ca/dccha-ahccd/default.asp?lang=En&amp;n=B1F8423A-1" class="external-link">Adjusted and Homogenized Canadian Climate Data (AHCCD)</a>.</p>
-<div class="section level4">
-<h4 id="released-version">Released version<a class="anchor" aria-label="anchor" href="#released-version"></a>
-</h4>
-<p><a href="https://cran.r-project.org/package=canadaHCD" class="external-link"><img src="http://www.r-pkg.org/badges/version/canadaHCD" alt="CRAN version"></a> <a href="https://cran.r-project.org/package=canadaHCD" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/grand-total/canadaHCD"></a></p>
-</div>
-<div class="section level4">
-<h4 id="build-status">Build status<a class="anchor" aria-label="anchor" href="#build-status"></a>
-</h4>
-<p><a href="https://travis-ci.org/gavinsimpson/canadaHCD" class="external-link"><img src="https://travis-ci.org/gavinsimpson/canadaHCD.svg?branch=master" alt="Build Status"></a> <a href="https://ci.appveyor.com/project/gavinsimpson/canadahcd/branch/master" class="external-link"><img src="https://ci.appveyor.com/api/projects/status/e3ptg9drviavci71/branch/master?svg=true" alt="Build status"></a> <a href="https://codecov.io/github/gavinsimpson/canadaHCD?branch=master" class="external-link"><img src="https://codecov.io/github/gavinsimpson/canadaHCD/coverage.svg?branch=master" alt="codecov.io"></a></p>
-</div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p><em>canadaHCD</em> is still under active development towards a 0.1 release. In the meantime, if you wish to use the package, please install it from this github repo, which is most easily achieved using Hadley Wickham’s <em>devtools</em> package:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"gavinsimpson/canadaHCD"</span><span class="op">)</span></span></code></pre></div>
+<p><em>canadaHCD</em> is still under active development towards a 0.1 release. In the meantime, if you wish to use the package, please install it from this github repo, which is most easily achieved using Hadley Wickham’s <em>remotes</em> package:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## install.packages("devtools")</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"gavinsimpson/canadaHCD"</span>)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
 <p>Say I’m interested in climate data for stations in Yellowknife, I can search for all known <code>stationID</code>s with <code>"Yellowknife"</code> in their name using <code><a href="reference/find_station.html">find_station()</a></code></p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/gavinsimpson/canadaHCD/" class="external-link">"canadaHCD"</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/find_station.html">find_station</a></span><span class="op">(</span><span class="st">"Yellowknife"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 7 x 5</span></span>
-<span><span class="co">#&gt;   Name                  Province              StationID LatitudeDD</span></span>
-<span><span class="co">#&gt;   &lt;fct&gt;                 &lt;fct&gt;                 &lt;fct&gt;          &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 YELLOWKNIFE A         Northwest Territories 1706            62.5</span></span>
-<span><span class="co">#&gt; 2 YELLOWKNIFE A         Northwest Territories 51058           62.5</span></span>
-<span><span class="co">#&gt; 3 YELLOWKNIFE OVERLAP   Northwest Territories 53898           62.5</span></span>
-<span><span class="co">#&gt; 4 YELLOWKNIFE-HENDERSON Northwest Territories 45467           62.4</span></span>
-<span><span class="co">#&gt; 5 YELLOWKNIFE CON MINE  Northwest Territories 8949            62.5</span></span>
-<span><span class="co">#&gt; 6 YELLOWKNIFE CS        Northwest Territories 27338           62.5</span></span>
-<span><span class="co">#&gt; 7 YELLOWKNIFE HYDRO     Northwest Territories 1707            62.7</span></span>
-<span><span class="co">#&gt;   LongitudeDD</span></span>
-<span><span class="co">#&gt;         &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1       -114.</span></span>
-<span><span class="co">#&gt; 2       -114.</span></span>
-<span><span class="co">#&gt; 3       -114.</span></span>
-<span><span class="co">#&gt; 4       -114.</span></span>
-<span><span class="co">#&gt; 5       -114.</span></span>
-<span><span class="co">#&gt; 6       -114.</span></span>
-<span><span class="co">#&gt; 7       -114.</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"canadaHCD"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">find_station</span>(<span class="st">"Yellowknife"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 6</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Name                  Province              ClimateID StationID LatitudeDD</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;fct&gt;                 &lt;fct&gt;                 &lt;fct&gt;     &lt;fct&gt;          &lt;dbl&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 YELLOWKNIFE A         Northwest Territories 2204100   1706            62.5</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 YELLOWKNIFE A         Northwest Territories 2204101   51058           62.5</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 YELLOWKNIFE AIRPORT   Northwest Territories 2204108   55358           62.5</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 YELLOWKNIFE-HENDERSON Northwest Territories 2204110   45467           62.4</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 YELLOWKNIFE CS        Northwest Territories 2204155   27338           62.5</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 YELLOWKNIFE HYDRO     Northwest Territories 2204200   1707            62.7</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   LongitudeDD</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         &lt;dbl&gt;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1       -114.</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2       -114.</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3       -114.</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       -114.</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5       -114.</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6       -114.</span></span></code></pre></div>
 <p>To download the monthly HCD from <code>YELLOWKNIFE HYDRO</code> I can use <code><a href="reference/hcd_monthly.html">hcd_monthly()</a></code>, providing it with the <code>StationID</code> for that particular weather station</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">yh</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hcd_monthly.html">hcd_monthly</a></span><span class="op">(</span><span class="fl">1707</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>yh <span class="ot">&lt;-</span> <span class="fu">hcd_monthly</span>(<span class="dv">1707</span>)</span></code></pre></div>
 <p>The data are returned as a <a href="https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html" class="external-link"><em>tibble</em></a> (a <code>tbl_df</code>), which shows a compact version of the data frame.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">yh</span></span>
-<span><span class="co">#&gt; # A tibble: 690 x 16</span></span>
-<span><span class="co">#&gt;    Station StationID Longitude Latitude Date  MaxTemp MinTemp MeanTemp</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt; &lt;yea&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1 YELLOW… 2204200       -114.     62.7 Jan …    NA      NA       NA  </span></span>
-<span><span class="co">#&gt;  2 YELLOW… 2204200       -114.     62.7 Feb …   -16.2   -26.4    -21.3</span></span>
-<span><span class="co">#&gt;  3 YELLOW… 2204200       -114.     62.7 Mar …   -14.4   -29.4    -21.9</span></span>
-<span><span class="co">#&gt;  4 YELLOW… 2204200       -114.     62.7 Apr …     1.2   -12.3     -5.6</span></span>
-<span><span class="co">#&gt;  5 YELLOW… 2204200       -114.     62.7 May …     9.3    -3.6      2.9</span></span>
-<span><span class="co">#&gt;  6 YELLOW… 2204200       -114.     62.7 Jun …    17.6     2.4     10  </span></span>
-<span><span class="co">#&gt;  7 YELLOW… 2204200       -114.     62.7 Jul …    20.6     9.6     15.1</span></span>
-<span><span class="co">#&gt;  8 YELLOW… 2204200       -114.     62.7 Aug …    18.9     7.2     13.1</span></span>
-<span><span class="co">#&gt;  9 YELLOW… 2204200       -114.     62.7 Sep …    10.9     2        6.5</span></span>
-<span><span class="co">#&gt; 10 YELLOW… 2204200       -114.     62.7 Oct …     6.1    -1.9      2.1</span></span>
-<span><span class="co">#&gt;    ExtremeHigh ExtremeLow TotalRain TotalSnow TotalPrecip LastSnowGrnd</span></span>
-<span><span class="co">#&gt;          &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;        &lt;int&gt;</span></span>
-<span><span class="co">#&gt;  1        NA         NA        NA        NA          NA             NA</span></span>
-<span><span class="co">#&gt;  2         1.1      -44.4       0         9.4         9.4           NA</span></span>
-<span><span class="co">#&gt;  3        -3.3      -40.6       0         2.8         2.8           NA</span></span>
-<span><span class="co">#&gt;  4        12.2      -31.7       0        18          18             NA</span></span>
-<span><span class="co">#&gt;  5        20        -11.7       9.9       2.8        12.7           NA</span></span>
-<span><span class="co">#&gt;  6        27.2       -1.7       4.8       0           4.8           NA</span></span>
-<span><span class="co">#&gt;  7        27.2        4.4      36.6       0          36.6           NA</span></span>
-<span><span class="co">#&gt;  8        27.2        1.7      17.8       0          17.8           NA</span></span>
-<span><span class="co">#&gt;  9        18.3       -6.1       5.8       2.8         8.6           NA</span></span>
-<span><span class="co">#&gt; 10        17.2      -15.6      19.1       5.1        24.1           NA</span></span>
-<span><span class="co">#&gt; # … with 680 more rows, and 2 more variables: MaxGustDir &lt;int&gt;,</span></span>
-<span><span class="co">#&gt; #   MaxGustSpeed &lt;chr&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>yh</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 690 × 16</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Station           ClimateID Longitude Latitude Date      MaxTemp MinTemp</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;             &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt; &lt;yearmon&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 YELLOWKNIFE HYDRO 2204200       -114.     62.7 Jan 1943     NA      NA  </span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 YELLOWKNIFE HYDRO 2204200       -114.     62.7 Feb 1943    -16.2   -26.4</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 YELLOWKNIFE HYDRO 2204200       -114.     62.7 Mar 1943    -14.4   -29.4</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 YELLOWKNIFE HYDRO 2204200       -114.     62.7 Apr 1943      1.2   -12.3</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 YELLOWKNIFE HYDRO 2204200       -114.     62.7 May 1943      9.3    -3.6</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 YELLOWKNIFE HYDRO 2204200       -114.     62.7 Jun 1943     17.6     2.4</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 YELLOWKNIFE HYDRO 2204200       -114.     62.7 Jul 1943     20.6     9.6</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 YELLOWKNIFE HYDRO 2204200       -114.     62.7 Aug 1943     18.9     7.2</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 YELLOWKNIFE HYDRO 2204200       -114.     62.7 Sep 1943     10.9     2  </span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 YELLOWKNIFE HYDRO 2204200       -114.     62.7 Oct 1943      6.1    -1.9</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    MeanTemp ExtremeHigh ExtremeLow TotalRain TotalSnow TotalPrecip LastSnowGrnd</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;        &lt;int&gt;</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1     NA          NA         NA        NA        NA          NA             NA</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2    -21.3         1.1      -44.4       0         9.4         9.4           NA</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3    -21.9        -3.3      -40.6       0         2.8         2.8           NA</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4     -5.6        12.2      -31.7       0        18          18             NA</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5      2.9        20        -11.7       9.9       2.8        12.7           NA</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6     10          27.2       -1.7       4.8       0           4.8           NA</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7     15.1        27.2        4.4      36.6       0          36.6           NA</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8     13.1        27.2        1.7      17.8       0          17.8           NA</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9      6.5        18.3       -6.1       5.8       2.8         8.6           NA</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10      2.1        17.2      -15.6      19.1       5.1        24.1           NA</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 680 more rows</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 2 more variables: MaxGustDir &lt;int&gt;, MaxGustSpeed &lt;chr&gt;</span></span></code></pre></div>
 <p>You should be able to work with these objects mostly as if they were data frames.</p>
 <p>Allthough not yet exposed through any functions in the package, you can access a snapshot of the station metadata via the <code>canadaHCD:::station_data</code> data frame.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">canadaHCD</span><span class="fu">:::</span><span class="va">station_data</span></span>
-<span><span class="co">#&gt; # A tibble: 12,565 x 19</span></span>
-<span><span class="co">#&gt;    Name  Province ClimateID StationID WMOID TCID  LatitudeDD LongitudeDD</span></span>
-<span><span class="co">#&gt;    &lt;fct&gt; &lt;fct&gt;    &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt; &lt;fct&gt;      &lt;dbl&gt;       &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1 ACTI… British… 1010066   14        &lt;NA&gt;  &lt;NA&gt;        48.9       -123.</span></span>
-<span><span class="co">#&gt;  2 ALBE… British… 1010235   15        &lt;NA&gt;  &lt;NA&gt;        48.4       -123.</span></span>
-<span><span class="co">#&gt;  3 BAMB… British… 1010595   16        &lt;NA&gt;  &lt;NA&gt;        48.6       -124.</span></span>
-<span><span class="co">#&gt;  4 BEAR… British… 1010720   17        &lt;NA&gt;  &lt;NA&gt;        48.5       -124 </span></span>
-<span><span class="co">#&gt;  5 BEAV… British… 1010774   18        &lt;NA&gt;  &lt;NA&gt;        48.5       -123.</span></span>
-<span><span class="co">#&gt;  6 BECH… British… 1010780   19        &lt;NA&gt;  &lt;NA&gt;        48.3       -124.</span></span>
-<span><span class="co">#&gt;  7 BREN… British… 1010960   20        &lt;NA&gt;  &lt;NA&gt;        48.6       -123.</span></span>
-<span><span class="co">#&gt;  8 BREN… British… 1010961   21        &lt;NA&gt;  &lt;NA&gt;        48.6       -123.</span></span>
-<span><span class="co">#&gt;  9 BREN… British… 1010965   22        &lt;NA&gt;  &lt;NA&gt;        48.6       -123.</span></span>
-<span><span class="co">#&gt; 10 BEAR… British… 1010PJR   9634      &lt;NA&gt;  &lt;NA&gt;        48.5       -124.</span></span>
-<span><span class="co">#&gt;    Latitude Longitude Elevation FirstYear LastYear HourlyFirstYr</span></span>
-<span><span class="co">#&gt;       &lt;int&gt;     &lt;int&gt;     &lt;dbl&gt;     &lt;int&gt;    &lt;int&gt;         &lt;int&gt;</span></span>
-<span><span class="co">#&gt;  1   4.85e8   -1.23e9       4        1984     1996            NA</span></span>
-<span><span class="co">#&gt;  2   4.82e8   -1.23e9      17        1971     1995            NA</span></span>
-<span><span class="co">#&gt;  3   4.84e8   -1.23e9      85.3      1961     1980            NA</span></span>
-<span><span class="co">#&gt;  4   4.83e8   -1.24e9     350.       1910     1971            NA</span></span>
-<span><span class="co">#&gt;  5   4.83e8   -1.23e9      61        1894     1952            NA</span></span>
-<span><span class="co">#&gt;  6   4.82e8   -1.23e9      12.2      1956     1966            NA</span></span>
-<span><span class="co">#&gt;  7   4.84e8   -1.23e9      38        1987     1997            NA</span></span>
-<span><span class="co">#&gt;  8   4.83e8   -1.23e9      30.5      1972     1980            NA</span></span>
-<span><span class="co">#&gt;  9   4.83e8   -1.23e9      91.4      1960     1970            NA</span></span>
-<span><span class="co">#&gt; 10   4.83e8   -1.24e9     419          NA       NA            NA</span></span>
-<span><span class="co">#&gt; # … with 12,555 more rows, and 5 more variables: HourlyLastYr &lt;int&gt;,</span></span>
-<span><span class="co">#&gt; #   DailyFirstYr &lt;int&gt;, DailyLastYr &lt;int&gt;, MonthlyFirstYr &lt;int&gt;,</span></span>
-<span><span class="co">#&gt; #   MonthlyLastYr &lt;int&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>canadaHCD<span class="sc">:::</span>station_data</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 8,797 × 19</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Name          Province ClimateID StationID WMOID TCID  LatitudeDD LongitudeDD</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;fct&gt;         &lt;fct&gt;    &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt; &lt;fct&gt;      &lt;dbl&gt;       &lt;dbl&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 ACTIVE PASS   British… 1010066   14        &lt;NA&gt;  &lt;NA&gt;        48.9       -123.</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 ALBERT HEAD   British… 1010235   15        &lt;NA&gt;  &lt;NA&gt;        48.4       -123.</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 BAMBERTON OC… British… 1010595   16        &lt;NA&gt;  &lt;NA&gt;        48.6       -124.</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 BEAR CREEK    British… 1010720   17        &lt;NA&gt;  &lt;NA&gt;        48.5       -124 </span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 BEAVER LAKE   British… 1010774   18        &lt;NA&gt;  &lt;NA&gt;        48.5       -123.</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 BECHER BAY    British… 1010780   19        &lt;NA&gt;  &lt;NA&gt;        48.3       -124.</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 BRENTWOOD BA… British… 1010960   20        &lt;NA&gt;  &lt;NA&gt;        48.6       -123.</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 BRENTWOOD CL… British… 1010961   21        &lt;NA&gt;  &lt;NA&gt;        48.6       -123.</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 BRENTWOOD W … British… 1010965   22        &lt;NA&gt;  &lt;NA&gt;        48.6       -123.</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 CENTRAL SAAN… British… 1011467   25        &lt;NA&gt;  &lt;NA&gt;        48.6       -123.</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     Latitude   Longitude Elevation FirstYear LastYear HourlyFirstYr HourlyLastYr</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        &lt;int&gt;       &lt;int&gt;     &lt;dbl&gt;     &lt;int&gt;    &lt;int&gt;         &lt;int&gt;        &lt;int&gt;</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 485200000 -1231700000       4        1984     1996            NA           NA</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 482400000 -1232900000      17        1971     1995            NA           NA</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 483500000 -1233100000      85.3      1961     1980            NA           NA</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 483000000 -1240000000     350.       1910     1971            NA           NA</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 483000000 -1232100000      61        1894     1952            NA           NA</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 482000000 -1233800000      12.2      1956     1966            NA           NA</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 483600000 -1232800000      38        1987     1997            NA           NA</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 483400000 -1232700000      30.5      1972     1980            NA           NA</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 483400000 -1232600000      91.4      1960     1970            NA           NA</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 483500000 -1232500000      53.3      1963     1994            NA           NA</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 8,787 more rows</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 4 more variables: DailyFirstYr &lt;int&gt;, DailyLastYr &lt;int&gt;, MonthlyFirstYr &lt;int&gt;, MonthlyLastYr &lt;int&gt;</span></span></code></pre></div>
 <p>If we wanted to know which resolutions of data were available for the <code>YELLOWKNIFE HYDRO</code> station, we can extract certain columns from the station data object</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"YELLOWKNIFE HYDRO"</span>, <span class="fu">canadaHCD</span><span class="fu">:::</span><span class="va">station_data</span><span class="op">$</span><span class="va">Name</span><span class="op">)</span></span>
-<span><span class="va">vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"HourlyFirstYr"</span>, <span class="st">"HourlyLastYr"</span>, <span class="st">"DailyFirstYr"</span>, <span class="st">"DailyLastYr"</span>, <span class="st">"MonthlyFirstYr"</span>, </span>
-<span>    <span class="st">"MonthlyLastYr"</span><span class="op">)</span></span>
-<span><span class="fu">canadaHCD</span><span class="fu">:::</span><span class="va">station_data</span><span class="op">[</span><span class="va">id</span>, <span class="va">vars</span><span class="op">]</span></span>
-<span><span class="co">#&gt; # A tibble: 1 x 6</span></span>
-<span><span class="co">#&gt;   HourlyFirstYr HourlyLastYr DailyFirstYr DailyLastYr MonthlyFirstYr</span></span>
-<span><span class="co">#&gt;           &lt;int&gt;        &lt;int&gt;        &lt;int&gt;       &lt;int&gt;          &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1            NA           NA         1943        2000           1943</span></span>
-<span><span class="co">#&gt;   MonthlyLastYr</span></span>
-<span><span class="co">#&gt;           &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1          2000</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"YELLOWKNIFE HYDRO"</span>, canadaHCD<span class="sc">:::</span>station_data<span class="sc">$</span>Name)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"HourlyFirstYr"</span>, <span class="st">"HourlyLastYr"</span>, <span class="st">"DailyFirstYr"</span>, <span class="st">"DailyLastYr"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"MonthlyFirstYr"</span>, <span class="st">"MonthlyLastYr"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>canadaHCD<span class="sc">:::</span>station_data[id, vars]</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 6</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   HourlyFirstYr HourlyLastYr DailyFirstYr DailyLastYr MonthlyFirstYr</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           &lt;int&gt;        &lt;int&gt;        &lt;int&gt;       &lt;int&gt;          &lt;int&gt;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1            NA           NA         1943        2000           1943</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   MonthlyLastYr</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           &lt;int&gt;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1          2000</span></span></code></pre></div>
 <p>The output shows that this station has no hourly data, but daily and monthly data sets exist.</p>
 </div>
 </div>
@@ -243,7 +226,15 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/gavinsimpson/canadaHCD/actions" class="external-link"><img src="https://github.com/gavinsimpson/canadaHCD/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://app.codecov.io/gh/gavinsimpson/canadaHCD" class="external-link"><img src="https://codecov.io/gh/gavinsimpson/canadaHCD/branch/main/graph/badge.svg?token=vDjUqs13Fb" alt="codecov"></a></li>
+<li><a href="https://cran.r-project.org/package=canadaHCD" class="external-link"><img src="https://www.r-pkg.org/badges/version/canadaHCD" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://cran.r-project.org/package=canadHCD" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/canadaHCD" alt="CRAN Downloads"></a></li>
+</ul>
+</div>
 
   </div>
 </div>
