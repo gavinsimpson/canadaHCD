@@ -7,19 +7,24 @@
 find_station(name = NULL, ignore.case = TRUE, glob = FALSE, ...)
 }
 \arguments{
-\item{name}{character; character string or a regular expression to be matched against known station names. See \code{\link{grep}} for details.}
+\item{name}{character; character string or a regular expression to be matched
+against known station names. See \code{\link{grep}} for details.}
 
-\item{ignore.case}{logical; by default the search for station names is not case-sensitive.}
+\item{ignore.case}{logical; by default the search for station names is not
+case-sensitive.}
 
-\item{glob}{logical; use wildcards (e.g. \code{"yell*"}) in the \code{name}. See \code{link{glob2rx}} for details.}
+\item{glob}{logical; use wildcards (e.g. \code{"yell*"}) in the \code{name}.
+See \code{link{glob2rx}} for details.}
 
 \item{...}{Additional arguments passed to \code{\link{grep}}.}
 }
 \value{
-An object of class \code{"hcd_station_list"}, which is a \code{"tbl_df"}, containing details of any matching HCD stations.
+An object of class \code{"hcd_station_list"}, which is a
+  \code{"tbl_df"}, containing details of any matching HCD stations.
 }
 \description{
-Search for stations in the Historical Climate Data inventory by name.
+Search for stations in the Historical Climate Data inventory by
+  name.
 }
 \examples{
 find_station("Regina")
