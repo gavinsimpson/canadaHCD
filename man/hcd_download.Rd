@@ -4,8 +4,15 @@
 \alias{hcd_download}
 \title{Download CSV files of Historical Climate Data records}
 \usage{
-hcd_download(station, file, dir = tempdir(), timescale = c("monthly",
-  "daily", "hourly"), year = NULL, month = NULL, progress = TRUE)
+hcd_download(
+  station,
+  file,
+  dir = tempdir(),
+  timescale = c("monthly", "daily", "hourly"),
+  year = NULL,
+  month = NULL,
+  progress = TRUE
+)
 }
 \arguments{
 \item{station}{character; one or more HCD station IDs.}

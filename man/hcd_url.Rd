@@ -4,8 +4,7 @@
 \alias{hcd_url}
 \title{Generate URLs to Historical Climate Data records}
 \usage{
-hcd_url(station, timescale = c("monthly", "daily", "hourly"), year,
-  month)
+hcd_url(station, timescale = c("monthly", "daily", "hourly"), year, month)
 }
 \arguments{
 \item{station}{character; one or more HCD station IDs.}
