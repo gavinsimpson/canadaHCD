@@ -14,7 +14,7 @@ library("canadaHCD")
 ```
 ```{r, download-fake, echo = FALSE}
 yh  <- read_hcd(system.file("extdata/1707-monthly-data.csv", package = "canadaHCD"))
-bvh <- read_hcd(system.file("extdata/2855-monthly-data.csv", package = "canadaHCD"))
+bvm <- read_hcd(system.file("extdata/2855-monthly-data.csv", package = "canadaHCD"))
 bvd <- read_hcd(system.file("extdata/2855-daily-data-2015.csv", package = "canadaHCD"))
 bvh <- read_hcd(system.file("extdata/2855-hourly-data-2013-jan.csv", package = "canadaHCD"))
 ```
@@ -23,7 +23,7 @@ The Government of Canada's Historical Climate Data [website](http://climate.weat
 
 The main piece of information required to access a dataset is the HCD `StationID`; an numeric ID internal to the Government of Canada's database. This `StationID` plus information about the resolution and period you want to retrieve data for are the key elements to accessing records. A list of these stations is regularly updated via a CSV located on a Government of Canada FTP server. As a convenience a recent snapshot of this CSV metadata is available via the unexported data frame `canadaHCD:::station_data`. A (currently) simple interface to this metadat is provided via `find_station()`. 
 
-Say you're interested in climate data for stations in Yellowknife, I can search for all known `stationID`s with `"Yellowknife"` in their name using `find_station()`
+Say you're interested in climate data for stations in Yellowknife, you can search for all known `stationID`s with `"Yellowknife"` in their name using `find_station()`
 
 ```{r find-station}
 library("canadaHCD")
