@@ -10,7 +10,7 @@ Maintainer: Gavin L. Simpson <ucfagls@gmail.com>
 Description: Access climate data from Government of Canada's Historical Climate
     Data API.
 Depends:
-    R (>= 2.10)
+    R (>= 4.1)
 Imports:
     readr,
     tibble,
