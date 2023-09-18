@@ -58,7 +58,7 @@
     if (isTRUE(clean)) {
         names(df) <-
             if (inherits(df[[5]], "Date")) { # must be daily
-                c("Longitude","Latitude","Station","StationID","Date","Data Quality",
+                c("Longitude","Latitude","Station","ClimateID","Date","Data Quality",
                   "MaxTemp","MaxTempFlag","MinTemp","MinTempFlag","MeanTemp",
                   "MeanTempFlag","HeatDegDays","HeatDegDaysFlag","CoolDegDays",
                   "CoolDegDaysFlag","TotalRain","TotalRainFlag","TotalSnow",
@@ -68,7 +68,7 @@
             } else if (inherits(df[[5]], "POSIXt")) { # must be hourly
                 # data format changed again - reported 17 Sept 2023
                 c("Longitude", "Latitude",
-                "Station", "StationID",
+                "Station", "ClimateID",
                 "DateTime",
                 "Temp", "TempFlag",
                 "DewPointTemp", "DewPointTempFlag",
@@ -82,7 +82,7 @@
                 "WindChill", "WindChillFlag",
                 "Weather")
             } else {                    # must be monthly
-                c("Longitude","Latitude","Station","StationID","Date",
+                c("Longitude","Latitude","Station","ClimateID","Date",
                   "MaxTemp","MaxTempFlag","MinTemp","MinTempFlag",
                   "MeanTemp","MeanTempFlag","ExtremeHigh","ExtremeHighFlag","ExtremeLow",
                   "ExtremeLowFlag","TotalRain","TotalRainFlag","TotalSnow",
@@ -106,7 +106,7 @@
     }
 
     ## reorder columns
-    df <- select(df, matches("Station"), matches("StationID"), everything())
+    df <- select(df, matches("Station"), matches("ClimateID"), everything())
 
     ## return
     df

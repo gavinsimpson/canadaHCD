@@ -10,6 +10,7 @@
 #'
 #' @author Gavin L. Simpson
 #'
+#' @importFrom tibble tibble
 #' @export
 #'
 #' @examples
@@ -35,7 +36,7 @@
     urls <- paste0("http://climate.weather.gc.ca/climate_data/bulk_data_e.html?stationID=",
                    station, "&Year=2000&Month=1&Day=14&format=csv&timeframe=3",
                    "&submit=%20Download+Data")
-    urls <- data_frame(station = station, url = urls)
+    urls <- tibble(station = station, url = urls)
     urls
 }
 
