@@ -10,3 +10,6 @@
 
 * `hcd_hourly()` and related functions updated to read the new data structure
   for hourly data. Reported by @dankelly #29
+
+* `collapse_hcd()` now explicitly sorts data by `Date` / `DateTime`. Reported
+  by @ConorIA #26
