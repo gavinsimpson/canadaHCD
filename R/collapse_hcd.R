@@ -7,7 +7,7 @@
 #'
 #' @author Gavin L. Simpson
 #'
-#' @importFrom dplyr bind_rows select everything matches
+#' @importFrom dplyr bind_rows select everything matches arrange
 #' @importFrom tibble add_column has_name
 #' @importFrom zoo as.yearmon
 `collapse_hcd` <- function(l) {

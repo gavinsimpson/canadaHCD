@@ -17,7 +17,9 @@ Imports:
     curl,
     dplyr,
     zoo,
-    utils
+    utils,
+    lutz,
+    tools
 Suggests:
     testthat,
     knitr,
