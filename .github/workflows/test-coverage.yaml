@@ -25,7 +25,7 @@ jobs:
         with:
           extra-packages: |
             any::covr
-          needs: coverage
+            any::sf
 
       - name: Test coverage
         run: covr::codecov()
