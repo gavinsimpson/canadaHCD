@@ -7,8 +7,11 @@
 climate_id(station)
 }
 \arguments{
-\item{station}{numeric or character; the ClimateIDs whose StationIDs are to
+\item{station}{numeric or character; the StationIDs whose ClimateIDs are to
 be returned.}
+}
+\value{
+A character vector of ClimateIDs.
 }
 \description{
 Returns the ClimateID for a supplied StationID

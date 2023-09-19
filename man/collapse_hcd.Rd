@@ -13,7 +13,8 @@ collapse_hcd(l)
 A \code{\link{tbl_df}} of the data after row binding each element of input.
 }
 \description{
-Given a list of HCD data sets, \code{collapse_hcd} binds together each element of the list (HCD dataset) row-wise into a single tibble.
+Given a list of HCD data sets, \code{collapse_hcd} binds together
+each element of the list (HCD dataset) row-wise into a single tibble.
 }
 \author{
 Gavin L. Simpson

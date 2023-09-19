@@ -21,7 +21,8 @@ Imports:
     lutz,
     tools,
     tidyselect,
-    lubridate
+    lubridate,
+    tidyr
 Suggests:
     testthat,
     knitr,
