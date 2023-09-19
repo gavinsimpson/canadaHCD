@@ -67,8 +67,8 @@
     }
     if (missing(file)) {
         file <- switch(timescale,
-                       "monthly" = paste("station", station, sep = "-"),
-                       "daily"   = {
+        "monthly" = paste("station", station, sep = "-"),
+        "daily"   = {
             ex <- expand.grid(station = station, year = year)
             paste("station", ex[,1], ex[,2], sep = "-")
         },

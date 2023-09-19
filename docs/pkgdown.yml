@@ -3,7 +3,7 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   canadaHCD-intro: canadaHCD-intro.html
-last_built: 2023-09-19T07:15Z
+last_built: 2023-09-19T08:21Z
 urls:
   reference: https://gavinsimpson.github.io/canadaHCD/reference
   article: https://gavinsimpson.github.io/canadaHCD/articles
