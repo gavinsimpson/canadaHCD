@@ -19,7 +19,8 @@ Imports:
     zoo,
     utils,
     lutz,
-    tools
+    tools,
+    tidyselect
 Suggests:
     testthat,
     knitr,
@@ -31,3 +32,5 @@ BugReports: https://github.com/gavinsimpson/canadaHCD/issues
 ByteCompile: true
 Encoding: UTF-8
 RoxygenNote: 7.2.3
+Roxygen: list(markdown = TRUE)
+Config/testthat/edition: 3

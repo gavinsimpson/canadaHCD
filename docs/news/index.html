@@ -64,6 +64,11 @@
 <ul><li>Data sets now return the Climate ID as variable <code>Climate ID</code>, not the Station ID. This is a change in the data files that can be downloaded from the Canadian Historical Climate Data server. Reported by <a href="https://github.com/BastienFR" class="external-link">@BastienFR</a> <a href="https://github.com/gavinsimpson/canadaHCD/issues/28" class="external-link">#28</a></li>
 </ul></div>
 <div class="section level3">
+<h3 id="new-features-0-0-3">New features<a class="anchor" aria-label="anchor" href="#new-features-0-0-3"></a></h3>
+<ul><li><p><code><a href="../reference/climate_id.html">climate_id()</a></code> and <code><a href="../reference/station_id.html">station_id()</a></code> functions that return the Climate ID (Station ID) for a supplied Station ID (Climate ID). These are helper functions to facilitate switching between the two identifier systems used by the HCD system.</p></li>
+<li><p><code><a href="../reference/update_station_data.html">update_station_data()</a></code> can update the station data stored within <em>canadaHCD</em>. Currently only downloads and formats the station data, but eventually will replace the stored data.</p></li>
+</ul></div>
+<div class="section level3">
 <h3 id="bug-fixes-0-0-3">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-0-3"></a></h3>
 <ul><li><p><code><a href="../reference/hcd_hourly.html">hcd_hourly()</a></code> and related functions updated to read the new data structure for hourly data. Reported by <a href="https://github.com/dankelly" class="external-link">@dankelly</a> <a href="https://github.com/gavinsimpson/canadaHCD/issues/29" class="external-link">#29</a></p></li>
 <li><p><code><a href="../reference/collapse_hcd.html">collapse_hcd()</a></code> now explicitly sorts data by <code>Date</code> / <code>DateTime</code>. Reported by <a href="https://github.com/ConorIA" class="external-link">@ConorIA</a> <a href="https://github.com/gavinsimpson/canadaHCD/issues/26" class="external-link">#26</a></p></li>

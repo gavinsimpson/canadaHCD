@@ -20,11 +20,11 @@ See \code{link{glob2rx}} for details.}
 }
 \value{
 An object of class \code{"hcd_station_list"}, which is a
-  \code{"tbl_df"}, containing details of any matching HCD stations.
+\code{"tbl_df"}, containing details of any matching HCD stations.
 }
 \description{
 Search for stations in the Historical Climate Data inventory by
-  name.
+name.
 }
 \examples{
 find_station("Regina")

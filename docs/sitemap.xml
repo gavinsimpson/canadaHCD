@@ -22,6 +22,9 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
+    <loc>/reference/climate_id.html</loc>
+  </url>
+  <url>
     <loc>/reference/collapse_hcd.html</loc>
   </url>
   <url>
@@ -47,5 +50,11 @@
   </url>
   <url>
     <loc>/reference/read_hcd.html</loc>
+  </url>
+  <url>
+    <loc>/reference/station_id.html</loc>
+  </url>
+  <url>
+    <loc>/reference/update_station_data.html</loc>
   </url>
 </urlset>
