@@ -1,60 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/404.html</loc>
+    <loc>https://gavinsimpson.github.io/canadaHCD/404.html</loc>
   </url>
   <url>
-    <loc>/LICENSE.html</loc>
+    <loc>https://gavinsimpson.github.io/canadaHCD/LICENSE.html</loc>
   </url>
   <url>
-    <loc>/articles/canadaHCD-intro.html</loc>
+    <loc>https://gavinsimpson.github.io/canadaHCD/articles/canadaHCD-intro.html</loc>
   </url>
   <url>
-    <loc>/articles/index.html</loc>
+    <loc>https://gavinsimpson.github.io/canadaHCD/articles/index.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
+    <loc>https://gavinsimpson.github.io/canadaHCD/authors.html</loc>
   </url>
   <url>
-    <loc>/index.html</loc>
+    <loc>https://gavinsimpson.github.io/canadaHCD/index.html</loc>
   </url>
   <url>
-    <loc>/news/index.html</loc>
+    <loc>https://gavinsimpson.github.io/canadaHCD/news/index.html</loc>
   </url>
   <url>
-    <loc>/reference/climate_id.html</loc>
+    <loc>https://gavinsimpson.github.io/canadaHCD/reference/climate_id.html</loc>
   </url>
   <url>
-    <loc>/reference/collapse_hcd.html</loc>
+    <loc>https://gavinsimpson.github.io/canadaHCD/reference/collapse_hcd.html</loc>
   </url>
   <url>
-    <loc>/reference/find_station.html</loc>
+    <loc>https://gavinsimpson.github.io/canadaHCD/reference/find_station.html</loc>
   </url>
   <url>
-    <loc>/reference/hcd_daily.html</loc>
+    <loc>https://gavinsimpson.github.io/canadaHCD/reference/hcd_daily.html</loc>
   </url>
   <url>
-    <loc>/reference/hcd_download.html</loc>
+    <loc>https://gavinsimpson.github.io/canadaHCD/reference/hcd_download.html</loc>
   </url>
   <url>
-    <loc>/reference/hcd_hourly.html</loc>
+    <loc>https://gavinsimpson.github.io/canadaHCD/reference/hcd_hourly.html</loc>
   </url>
   <url>
-    <loc>/reference/hcd_monthly.html</loc>
+    <loc>https://gavinsimpson.github.io/canadaHCD/reference/hcd_monthly.html</loc>
   </url>
   <url>
-    <loc>/reference/hcd_url.html</loc>
+    <loc>https://gavinsimpson.github.io/canadaHCD/reference/hcd_url.html</loc>
   </url>
   <url>
-    <loc>/reference/index.html</loc>
+    <loc>https://gavinsimpson.github.io/canadaHCD/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/read_hcd.html</loc>
+    <loc>https://gavinsimpson.github.io/canadaHCD/reference/read_hcd.html</loc>
   </url>
   <url>
-    <loc>/reference/station_id.html</loc>
+    <loc>https://gavinsimpson.github.io/canadaHCD/reference/station_id.html</loc>
   </url>
   <url>
-    <loc>/reference/update_station_data.html</loc>
+    <loc>https://gavinsimpson.github.io/canadaHCD/reference/update_station_data.html</loc>
   </url>
 </urlset>

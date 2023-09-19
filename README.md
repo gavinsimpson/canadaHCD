@@ -44,7 +44,7 @@ using `find_station()`
     find_station("Yellowknife")
     #> # A tibble: 6 × 6
     #>   Name                  Province              ClimateID StationID LatitudeDD
-    #>   <fct>                 <fct>                 <fct>     <fct>          <dbl>
+    #>   <chr>                 <chr>                 <chr>     <chr>          <dbl>
     #> 1 YELLOWKNIFE A         Northwest Territories 2204100   1706            62.5
     #> 2 YELLOWKNIFE A         Northwest Territories 2204101   51058           62.5
     #> 3 YELLOWKNIFE AIRPORT   Northwest Territories 2204108   55358           62.5
@@ -107,9 +107,9 @@ access a snapshot of the station metadata via the
 `canadaHCD:::station_data` data frame.
 
     canadaHCD:::station_data
-    #> # A tibble: 8,797 × 19
+    #> # A tibble: 8,797 × 20
     #>    Name          Province ClimateID StationID WMOID TCID  LatitudeDD LongitudeDD
-    #>    <fct>         <fct>    <fct>     <fct>     <fct> <fct>      <dbl>       <dbl>
+    #>    <chr>         <chr>    <chr>     <chr>     <chr> <chr>      <dbl>       <dbl>
     #>  1 ACTIVE PASS   British… 1010066   14        <NA>  <NA>        48.9       -123.
     #>  2 ALBERT HEAD   British… 1010235   15        <NA>  <NA>        48.4       -123.
     #>  3 BAMBERTON OC… British… 1010595   16        <NA>  <NA>        48.6       -124.
@@ -121,7 +121,7 @@ access a snapshot of the station metadata via the
     #>  9 BRENTWOOD W … British… 1010965   22        <NA>  <NA>        48.6       -123.
     #> 10 CENTRAL SAAN… British… 1011467   25        <NA>  <NA>        48.6       -123.
     #>     Latitude   Longitude Elevation FirstYear LastYear HourlyFirstYr HourlyLastYr
-    #>        <int>       <int>     <dbl>     <int>    <int>         <int>        <int>
+    #>        <dbl>       <dbl>     <dbl>     <dbl>    <dbl>         <dbl>        <dbl>
     #>  1 485200000 -1231700000       4        1984     1996            NA           NA
     #>  2 482400000 -1232900000      17        1971     1995            NA           NA
     #>  3 483500000 -1233100000      85.3      1961     1980            NA           NA
@@ -133,7 +133,7 @@ access a snapshot of the station metadata via the
     #>  9 483400000 -1232600000      91.4      1960     1970            NA           NA
     #> 10 483500000 -1232500000      53.3      1963     1994            NA           NA
     #> # ℹ 8,787 more rows
-    #> # ℹ 4 more variables: DailyFirstYr <int>, DailyLastYr <int>, MonthlyFirstYr <int>, MonthlyLastYr <int>
+    #> # ℹ 5 more variables: DailyFirstYr <dbl>, DailyLastYr <dbl>, MonthlyFirstYr <dbl>, MonthlyLastYr <dbl>, TimeZone <chr>
 
 If we wanted to know which resolutions of data were available for the
 `YELLOWKNIFE HYDRO` station, we can extract certain columns from the
@@ -145,10 +145,10 @@ station data object
     canadaHCD:::station_data[id, vars]
     #> # A tibble: 1 × 6
     #>   HourlyFirstYr HourlyLastYr DailyFirstYr DailyLastYr MonthlyFirstYr
-    #>           <int>        <int>        <int>       <int>          <int>
+    #>           <dbl>        <dbl>        <dbl>       <dbl>          <dbl>
     #> 1            NA           NA         1943        2000           1943
     #>   MonthlyLastYr
-    #>           <int>
+    #>           <dbl>
     #> 1          2000
 
 The output shows that this station has no hourly data, but daily and
