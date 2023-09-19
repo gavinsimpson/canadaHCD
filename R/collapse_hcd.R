@@ -1,6 +1,7 @@
 #' @title Bind a list of HCD data sets, row-wise.
 #'
-#' @description Given a list of HCD data sets, \code{collapse_hcd} binds together each element of the list (HCD dataset) row-wise into a single tibble.
+#' @description Given a list of HCD data sets, `collapse_hcd` binds together
+#'   each element of the list (HCD dataset) row-wise into a single tibble.
 #' @param l a list whose elements are tibbles that should be bound, row-wise.
 #'
 #' @return A \code{\link{tbl_df}} of the data after row binding each element of input.
@@ -33,7 +34,7 @@
     l <- if (has_name(l, "DateTime")) {
         # add time zone info
         l |> left_join(select(station_data, all_of(c("ClimateID", "TimeZone"))),
-            join_by(ClimateID == ClimateID)) |>
+            join_by("ClimateID" == "ClimateID")) |>
             mutate(DateTime = force_tz(.data$DateTime,
                 tzone = .data$TimeZone)) |>
             select(!all_of("TimeZone")) |>

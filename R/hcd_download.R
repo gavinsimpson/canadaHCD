@@ -46,7 +46,7 @@
                            timescale = c("monthly", "daily", "hourly"),
                            year = NULL, month = NULL, progress = TRUE) {
     timescale <- match.arg(timescale)
-    station <- as.integer(station)
+    station <- as.character(station)
     if (!is.null(year)) {
         year <- as.integer(year)
     }

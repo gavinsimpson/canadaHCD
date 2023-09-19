@@ -20,7 +20,7 @@
 `hcd_url` <- function(station, timescale = c("monthly", "daily", "hourly"),
                       year, month) {
     timescale <- match.arg(timescale)
-    station <- as.integer(station)
+    station <- as.character(station)
     urls <- switch(timescale,
                    "monthly" = hcd_url_monthly(station),
                    "daily"   = hcd_url_daily(station,
@@ -41,21 +41,23 @@
 }
 
 #' @importFrom tibble as_tibble add_column
+#' @importFrom tidyr expand_grid
 `hcd_url_daily` <- function(station, year) {
-    expand <- expand.grid(station = station, year = year)
+    expand <- expand_grid(station = station, year = year)
     urls <- paste0("http://climate.weather.gc.ca/climate_data/bulk_data_e.html?stationID=",
                    expand$station, "&Year=", expand$year, "&Month=1&Day=14&format=csv&timeframe=2",
                    "&submit=%20Download+Data")
-    urls <- add_column(as_tibble(expand), url = urls)
+    urls <- add_column(expand, url = urls)
     urls
 }
 
 #' @importFrom tibble as_tibble add_column
+#' @importFrom tidyr expand_grid
 `hcd_url_hourly` <- function(station, year, month) {
-    expand <- expand.grid(station = station, year = year, month = month)
+    expand <- expand_grid(station = station, year = year, month = month)
     urls <- paste0("http://climate.weather.gc.ca/climate_data/bulk_data_e.html?stationID=",
                    expand$station, "&Year=", expand$year, "&Month=", expand$month,
                    "&Day=14&format=csv&timeframe=1", "&submit=%20Download+Data")
-    urls <- add_column(as_tibble(expand), url = urls)
+    urls <- add_column(expand, url = urls)
     urls
 }

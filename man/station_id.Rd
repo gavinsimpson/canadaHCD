@@ -10,6 +10,9 @@ station_id(id)
 \item{id}{numeric or character; the ClimateIDs whose StationIDs are to be
 returned.}
 }
+\value{
+A character vector of StationIDs
+}
 \description{
 Returns the StationID for a supplied ClimateID
 }
