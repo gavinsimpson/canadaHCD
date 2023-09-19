@@ -38,7 +38,7 @@
             TimeZone = tz_lookup_coords(.data$LatitudeDD, .data$LongitudeDD,
                 method = "accurate"))
 
-    class(stns) <- c("hcd_stn", class(stns))
+    class(stns) <- c("hcd_station_list", class(stns))
     attr(stns, "timestamp") <- stn_ts
     stns
 }
