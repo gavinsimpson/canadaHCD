@@ -17,23 +17,33 @@ hcd_download(
 \arguments{
 \item{station}{character; one or more HCD station IDs.}
 
-\item{file}{character; one or more file names. If not supplied, file names of the form \code{station-year-month.csv}, with \code{year} and \code{month} appended as determined by argument \code{timescale}.}
+\item{file}{character; one or more file names. If not supplied, file names
+of the form \code{station-year-month.csv}, with \code{year} and \code{month} appended as
+determined by argument \code{timescale}.}
 
-\item{dir}{character; vector of one or more directory paths in which CSV files will be saved.scale of the requested Historical Climate Data records. If multiple paths supplied, there should be one path per station.}
+\item{dir}{character; vector of one or more directory paths in which CSV
+files will be saved.scale of the requested Historical Climate Data
+records. If multiple paths supplied, there should be one path per station.}
 
-\item{timescale}{character; the timescale of the requested Historical Climate Data records.}
+\item{timescale}{character; the timescale of the requested Historical
+Climate Data records.}
 
-\item{year}{numeric; vector of one or more years. Needed for daily or hourly data only.}
+\item{year}{numeric; vector of one or more years. Needed for daily or hourly
+data only.}
 
 \item{month}{numeric; vector of one or months. Needed for hourly data only.}
 
-\item{progress}{logical; if \code{TRUE}, a bar is shown indicating progress in downloading station data from the HCD website.}
+\item{progress}{logical; if \code{TRUE}, a bar is shown indicating progress in
+downloading station data from the HCD website.}
 }
 \value{
-A character vector containing file paths to the downloaded CSVs is returned invisibly.
+A character vector containing file paths to the downloaded CSVs is
+returned invisibly.
 }
 \description{
-Downloads raw CSV data files from the Canadian Historical Climate Data website. These are the raw files you would obtain if you accessed a data record through the HCD website.
+Downloads raw CSV data files from the Canadian Historical
+Climate Data website. These are the raw files you would obtain if you
+accessed a data record through the HCD website.
 }
 \examples{
 f <- hcd_download(1707, timescale = "monthly")

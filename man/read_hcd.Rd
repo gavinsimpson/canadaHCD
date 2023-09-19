@@ -24,8 +24,8 @@ A \code{\link{tbl_df}}.
 }
 \description{
 Reads data from CSV files download from the Canada Historical
-  Climate Data website. The function knows about hourly, daily, and monthly
-  data formatted files.
+Climate Data website. The function knows about hourly, daily, and monthly
+data formatted files.
 }
 \examples{
 ## read a monthly data file
@@ -37,7 +37,8 @@ read_hcd(system.file("extdata/2855-daily-data-2015.csv",
 }
 \author{
 Gavin L. Simpson
+\subsection{FIXME: if hadley fixes the bug in count_fields, add it back here as}{
 
-## FIXME: if hadley fixes the bug in count_fields, add it back here as
 import from readr & remove utils import
+}
 }

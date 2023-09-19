@@ -27,7 +27,7 @@ A \code{\link{tbl_df}} containing the requested monthly climate data
 }
 \description{
 Hourly Historical Climate Data for stated station IDs are
-  downloaded from the Government of Canada's Historical Climate Data website.
+downloaded from the Government of Canada's Historical Climate Data website.
 }
 \author{
 Gavin L. Simpson
