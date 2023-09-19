@@ -7,9 +7,10 @@
 #'
 #' @author Gavin L. Simpson
 #'
-#' @importFrom dplyr bind_rows select everything matches arrange
+#' @importFrom dplyr bind_rows select everything matches arrange left_join join_by all_of
 #' @importFrom tibble add_column has_name
 #' @importFrom zoo as.yearmon
+#' @importFrom lubridate force_tz
 `collapse_hcd` <- function(l) {
     nr <- vapply(l, NROW, integer(1L))
 
@@ -30,7 +31,13 @@
 
     # arrange by DateTime to ensure all in correct order as per #26
     l <- if (has_name(l, "DateTime")) {
-        l |> arrange(.data$ClimateID, .data$DateTime)
+        # add time zone info
+        l |> left_join(select(station_data, all_of(c("ClimateID", "TimeZone"))),
+            join_by(ClimateID == ClimateID)) |>
+            mutate(DateTime = force_tz(.data$DateTime,
+                tzone = .data$TimeZone)) |>
+            select(!all_of("TimeZone")) |>
+            arrange(.data$ClimateID, .data$DateTime)
     } else {
         l |> arrange(.data$ClimateID, .data$Date)
     }

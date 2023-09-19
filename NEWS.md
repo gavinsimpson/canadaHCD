@@ -6,6 +6,12 @@
   ID. This is a change in the data files that can be downloaded from the
   Canadian Historical Climate Data server. Reported by @BastienFR #28
 
+* Time zone information is now added to the `DateTime` (`POSIXct`) variable
+  returned for the hourly data. The time zone for each station is stored in
+  `station_data`, and is looked up using `tz_lookup_coords()` from the *lutz*
+  package. #18 Reported by @BastienFR with *lutz* solution suggested by
+  @ateucher
+
 ## New features
 
 * `climate_id()` and `station_id()` functions that return the Climate ID

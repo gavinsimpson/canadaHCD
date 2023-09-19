@@ -20,7 +20,8 @@ Imports:
     utils,
     lutz,
     tools,
-    tidyselect
+    tidyselect,
+    lubridate
 Suggests:
     testthat,
     knitr,
