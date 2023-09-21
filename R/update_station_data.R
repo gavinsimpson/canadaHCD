@@ -17,11 +17,11 @@
     stn_url <- "https://collaboration.cmc.ec.gc.ca/cmc/climate/Get_More_Data_Plus_de_donnees/Station%20Inventory%20EN.csv"
     tmp <- tempfile() # tempfile to download file to
     f <- curl_download(stn_url, destfile = tmp) # download stn data file
-    
+
     # do the timestamp work
     stn_ts <- readLines(f, n = 1)
     stn_ts <- sub("Modified Date: ", "", stn_ts) |> as.POSIXct()
-    
+
     stns <- read_csv(f, skip = 3L,
         col_types = "ccccccddddddddddddd", na = c("", "NA"), progress = FALSE)
     nams <- c("Name", "Province", "ClimateID", "StationID", "WMOID", "TCID",
@@ -33,12 +33,21 @@
     names(stns) <- nams
     stns <- stns |>
         mutate(across(all_of(c("LatitudeDD", "LongitudeDD", "Latitude",
-          "Longitude")), .fns = ~ na_if(.x, y = 0)),
-            Province = toTitleCase(tolower(as.character(.data$Province))),
-            TimeZone = tz_lookup_coords(.data$LatitudeDD, .data$LongitudeDD,
-                method = "accurate"))
+            "Longitude")), .fns = ~ na_if(.x, y = 0)),
+        Province = toTitleCase(tolower(as.character(.data$Province))),
+        TimeZone = tz_lookup_coords(.data$LatitudeDD, .data$LongitudeDD,
+            method = "accurate"))
 
     class(stns) <- c("hcd_station_list", class(stns))
     attr(stns, "timestamp") <- stn_ts
     stns
+}
+
+# This function is never called.
+# It only makes `sf` available in the package for `lutz` to use.
+# `lutz` only has `sf` in Suggests, but it is needed for the function we use
+# from `lutz`
+# See: https://github.com/ateucher/lutz/issues/9
+stub <- function() {
+   sf::st_as_sf()
 }

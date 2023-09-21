@@ -22,7 +22,8 @@ Imports:
     tools,
     tidyselect,
     lubridate,
-    tidyr
+    tidyr,
+    sf
 Suggests:
     testthat,
     knitr,
