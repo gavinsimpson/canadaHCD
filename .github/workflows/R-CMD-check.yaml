@@ -50,9 +50,8 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          packages: |
+          extra-packages: |
             any::rcmdcheck
-            any::sf
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2
