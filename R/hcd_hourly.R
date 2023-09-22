@@ -12,7 +12,8 @@
 #'   in downloading station data from the HCD website.
 #' @param ... Further arguments passed to \code{\link{read_hcd}}.
 #'
-#' @return A \code{\link{tbl_df}} containing the requested monthly climate data
+#' @return A [`tibble::tbl_df-class`] containing the requested hourly climate
+#'   data.
 #'
 #' @author Gavin L. Simpson
 #'
