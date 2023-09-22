@@ -23,7 +23,8 @@ in downloading station data from the HCD website.}
 \item{...}{Further arguments passed to \code{\link{read_hcd}}.}
 }
 \value{
-A \code{\link{tbl_df}} containing the requested monthly climate data
+A \code{\link[tibble:tbl_df-class]{tibble::tbl_df}} containing the requested hourly climate
+data.
 }
 \description{
 Hourly Historical Climate Data for stated station IDs are
