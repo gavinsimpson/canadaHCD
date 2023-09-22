@@ -2,15 +2,15 @@
 #'
 #' @description Hourly Historical Climate Data for stated station IDs are
 #'   downloaded from the Government of Canada's Historical Climate Data website.
-#' @param station Character or numeric; one or more HCD station IDs.
+#' @param station character or numeric; one or more HCD station IDs.
 #' @param year numeric; vector of one or more years
 #' @param month numeric; vector of one or months
-#' @param collapse Logical; if \code{TRUE} and multiple \code{station}s are
-#'   requested a single \code{data frame} is returned, formed by row-binding
+#' @param collapse Logical; if `TRUE` and multiple `station`s are
+#'   requested a single data frame is returned, formed by row-binding
 #'   the data for each station and prepending a station identifier variable.
-#' @param progress Logical; if \code{TRUE}, a bar is shown indicating progress
+#' @param progress Logical; if `TRUE`, a bar is shown indicating progress
 #'   in downloading station data from the HCD website.
-#' @param ... Further arguments passed to \code{\link{read_hcd}}.
+#' @param ... Further arguments passed to [[read_hcd()].
 #'
 #' @return A [`tibble::tbl_df-class`] containing the requested hourly climate
 #'   data.
